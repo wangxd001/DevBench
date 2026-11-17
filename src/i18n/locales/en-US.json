@@ -252,6 +252,14 @@
       "totalDays": "Total Days",
       "years": "Years",
       "months": "Months"
+    },
+    "hash-generator": {
+      "name": "Hash Generator (MD5 / SHA)",
+      "description": "Calculate MD5 and SHA hash digests",
+      "input": "Text",
+      "calculate": "Calculate",
+      "copy": "Copy",
+      "securityNote": "Hashing is not encryption. MD5 and SHA-1 are not suitable for security-sensitive use."
     }
   }
 }

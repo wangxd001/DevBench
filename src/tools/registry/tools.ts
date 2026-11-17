@@ -15,6 +15,7 @@ const UnicodeConverter = lazy(() => import("@/tools/encoding/unicode-converter")
 const HtmlEntityConverter = lazy(() => import("@/tools/encoding/html-entity-converter").then(m => ({ default: m.HtmlEntityConverter })));
 const DatetimeFormatter = lazy(() => import("@/tools/datetime/datetime-formatter").then(m => ({ default: m.DatetimeFormatter })));
 const DateCalculator = lazy(() => import("@/tools/datetime/date-calculator").then(m => ({ default: m.DateCalculator })));
+const HashGenerator = lazy(() => import("@/tools/encoding/hash-generator").then(m => ({ default: m.HashGenerator })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -153,16 +154,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     relatedTools: ["json-formatter", "json-yaml-converter", "text-diff"],
   },
 
-  "hash-generator": {
+"hash-generator": {
     id: "hash-generator",
-    name: { "zh-CN": "MD5 / SHA 哈希计算", "en-US": "Hash Generator" },
-    description: { "zh-CN": "计算文本的 MD5 和 SHA 哈希", "en-US": "Calculate MD5 and SHA hashes" },
+    name: { "zh-CN": "MD5 / SHA 哈希计算", "en-US": "Hash Generator (MD5 / SHA)" },
+    description: { "zh-CN": "计算文本的 MD5 和 SHA 哈希摘要", "en-US": "Calculate MD5 and SHA hash digests" },
     categoryId: "encoding",
     tags: ["hash", "encoding"],
     keywords: { "zh-CN": ["hash", "md5", "sha"], "en-US": ["hash", "md5", "sha"] },
     icon: "lock",
     route: "/tools/hash-generator",
-    component: ComingSoon,
+    component: HashGenerator,
     recommended: false,
     relatedTools: ["base64-converter", "uuid-generator", "random-string-generator"],
   },

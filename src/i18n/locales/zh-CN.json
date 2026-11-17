@@ -252,6 +252,14 @@
       "totalDays": "总天数",
       "years": "年",
       "months": "月"
+    },
+    "hash-generator": {
+      "name": "MD5 / SHA 哈希计算",
+      "description": "计算文本的 MD5 和 SHA 哈希摘要",
+      "input": "文本",
+      "calculate": "计算",
+      "copy": "复制",
+      "securityNote": "哈希计算不等于加密。MD5 和 SHA-1 不适合安全敏感用途。"
     }
   }
 }
