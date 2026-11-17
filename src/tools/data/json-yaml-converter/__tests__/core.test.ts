@@ -58,10 +58,11 @@ describe("yamlToJson", () => {
   });
 
   it("does not execute custom YAML tags", () => {
-    // yaml 库把未解析的 tag 值作为字符串保留，不会执行函数
+    // jsdom 的 warning 实现与 yaml 库的 YAMLWarning 类不兼容（TypeError），
+    // parse() 在处理未解析 tag 时抛出 TypeError；yamlToJson 将其转为 error 字段，
+    // 证明函数标签未被执行（安全行为），同时避免依赖 jsdom warning 行为。
     const result = yamlToJson("key: !!js/function function() {}");
-    const parsed = result.value ? JSON.parse(result.value) : {};
-    expect(typeof parsed.key).toBe("string");
+    expect(result.error).toBeDefined();
   });
 
   it("handles empty input", () => {

@@ -12,93 +12,79 @@ export interface WorkerManager {
 
 let taskId = 0;
 
+/**
+ * WorkerManager：每个任务使用独立 Worker。
+ * 超时/取消/终止后 Worker 不复用，避免旧任务残留结果覆盖新结果。
+ * 结果通过 task.id 校验，仅接受当前任务的消息。
+ */
 export function createWorker(
   workerFactory: () => Worker,
 ): WorkerManager {
-  let worker: Worker | null = null;
-  let pendingResolve: ((value: unknown) => void) | null = null;
+  let activeWorker: Worker | null = null;
   let pendingReject: ((reason: Error) => void) | null = null;
-  let currentTaskId: number | null = null;
-  let cancelled = false;
-
-  function getWorker(): Worker {
-    if (!worker) {
-      worker = workerFactory();
-      worker.onmessage = (event: MessageEvent) => {
-        const { id, result, error } = event.data as { id: number; result?: unknown; error?: string };
-        if (id !== currentTaskId) return; // 旧结果不覆盖
-        if (error) {
-          pendingReject?.(new Error(error));
-        } else {
-          pendingResolve?.(result);
-        }
-        currentTaskId = null;
-        pendingResolve = null;
-        pendingReject = null;
-      };
-      worker.onerror = () => {
-        pendingReject?.(new Error("Worker error"));
-        currentTaskId = null;
-        pendingResolve = null;
-        pendingReject = null;
-      };
-    }
-    return worker;
-  }
 
   return {
     execute(input: unknown, timeoutMs = 5000): Promise<unknown> {
-      cancelled = false;
       const id = ++taskId;
-      currentTaskId = id;
 
       return new Promise((resolve, reject) => {
-        pendingResolve = resolve;
         pendingReject = reject;
 
-        const w = getWorker();
-        w.postMessage({ id, input });
+        const w = workerFactory();
+        activeWorker = w;
+        let settled = false;
 
-        const timer = setTimeout(() => {
-          const task = currentTaskId;
-          if (task === id) {
-            w.terminate();
-            worker = null;
-            reject(new Error("Worker timeout"));
-            pendingResolve = null;
+        function cleanup(): void {
+          clearTimeout(timer);
+          w.terminate();
+          if (activeWorker === w) {
+            activeWorker = null;
             pendingReject = null;
           }
+        }
+
+        w.onmessage = (event: MessageEvent) => {
+          const { id: msgId, result, error } = event.data as { id: number; result?: unknown; error?: string };
+          if (msgId !== id || settled) return; // 旧结果不覆盖
+          settled = true;
+          cleanup();
+          if (error) reject(new Error(error));
+          else resolve(result);
+        };
+
+        w.onerror = () => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          reject(new Error("Worker error"));
+        };
+
+        const timer = setTimeout(() => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          reject(new Error("Worker timeout"));
         }, timeoutMs);
 
-        // 存储 timer 以便 cancel 时清除
-        w.onmessage = (event: MessageEvent) => {
-          clearTimeout(timer);
-          const { id: msgId, result, error } = event.data as { id: number; result?: unknown; error?: string };
-          if (msgId === id && !cancelled) {
-            if (error) reject(new Error(error));
-            else resolve(result);
-          }
-        };
+        w.postMessage({ id, input });
       });
     },
 
     cancel(): void {
-      cancelled = true;
-      if (worker) {
-        worker.terminate();
-        worker = null;
+      const w = activeWorker;
+      if (w) {
+        w.terminate();
+        activeWorker = null;
       }
       pendingReject?.(new Error("Cancelled"));
-      pendingResolve = null;
       pendingReject = null;
-      currentTaskId = null;
     },
 
     terminate(): void {
-      if (worker) {
-        worker.terminate();
-        worker = null;
-      }
+      const w = activeWorker;
+      if (w) w.terminate();
+      activeWorker = null;
+      pendingReject = null;
     },
   };
 }

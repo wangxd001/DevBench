@@ -1,4 +1,4 @@
-interface RegexWorkerInput {
+export interface RegexWorkerInput {
   pattern: string;
   flags: string;
   text: string;

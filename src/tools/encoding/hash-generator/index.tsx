@@ -1,26 +1,46 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { ToolPageLayout } from "@/components/layout/ToolPageLayout";
 import { ToolActionBar } from "@/components/editor/ToolActionBar";
 import { ToolInputPanel } from "@/components/editor/ToolInputPanel";
 import { TextareaInput } from "@/components/editor/TextareaInput";
-import { computeHash, type HashAlgorithm } from "./core";
+import { createWorker, type WorkerManager } from "@/lib/worker/worker-base";
+import type { HashWorkerOutput } from "@/lib/worker/hash-worker-entry";
+import type { HashAlgorithm } from "./core";
+
+// Vite 原生 Worker 语法
+import HashWorker from "@/lib/worker/hash-worker-entry?worker";
 
 const ALGOS: HashAlgorithm[] = ["md5", "sha-1", "sha-256", "sha-384", "sha-512"];
+const HASH_TIMEOUT_MS = 10000;
 
 export function HashGenerator() {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
   const [algo, setAlgo] = useState<HashAlgorithm>("sha-256");
-  const [result, setResult] = useState<import("./core").HashResult | null>(null);
+  const [result, setResult] = useState<HashWorkerOutput | null>(null);
   const [processing, setProcessing] = useState(false);
+
+  const managerRef = useRef<WorkerManager | null>(null);
+  useEffect(() => {
+    managerRef.current = createWorker(() => new HashWorker() as unknown as Worker);
+    return () => managerRef.current?.terminate();
+  }, []);
 
   const handleHash = useCallback(async () => {
     setProcessing(true);
     setResult(null);
-    const res = await computeHash(input, algo);
-    setResult(res);
-    setProcessing(false);
+    try {
+      const out = (await managerRef.current!.execute(
+        { text: input, algorithm: algo },
+        HASH_TIMEOUT_MS
+      )) as HashWorkerOutput;
+      setResult(out);
+    } catch (e) {
+      setResult({ value: "", error: e instanceof Error ? e.message : String(e) });
+    } finally {
+      setProcessing(false);
+    }
   }, [input, algo]);
 
   const handleCopy = useCallback(async () => {

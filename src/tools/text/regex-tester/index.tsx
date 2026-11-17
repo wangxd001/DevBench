@@ -1,23 +1,35 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { ToolPageLayout } from "@/components/layout/ToolPageLayout";
 import { ToolActionBar } from "@/components/editor/ToolActionBar";
 import { ToolInputPanel } from "@/components/editor/ToolInputPanel";
 import { CodeEditor } from "@/components/editor/CodeEditor";
 import { TextareaInput } from "@/components/editor/TextareaInput";
-import { regexWorkerHandler } from "@/lib/worker/regex-worker";
+import { createWorker, type WorkerManager } from "@/lib/worker/worker-base";
+import type { RegexWorkerOutput } from "@/lib/worker/regex-worker";
 import { validatePattern } from "./core";
 
+// Vite 原生 Worker 语法：?worker 后缀打包为独立 Worker 脚本
+import RegexWorker from "@/lib/worker/regex-worker-entry?worker";
+
+const REGEX_TIMEOUT_MS = 3000;
 
 export function RegexTester() {
   const { t } = useTranslation();
   const [pattern, setPattern] = useState("");
   const [text, setText] = useState("");
   const [flags, setFlags] = useState<Set<string>>(new Set(["g"]));
-  const [results, setResults] = useState<ReturnType<typeof regexWorkerHandler> | null>(null);
+  const [results, setResults] = useState<RegexWorkerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [truncated, setTruncated] = useState(false);
+  const [processing, setProcessing] = useState(false);
 
+  // 每个组件实例持有独立 WorkerManager，卸载时终止
+  const managerRef = useRef<WorkerManager | null>(null);
+  useEffect(() => {
+    managerRef.current = createWorker(() => new RegexWorker() as unknown as Worker);
+    return () => managerRef.current?.terminate();
+  }, []);
   const flagsStr = Array.from(flags).join("");
 
   const toggleFlag = (flag: string) => {
@@ -29,21 +41,33 @@ export function RegexTester() {
     });
   };
 
-  const handleTest = useCallback(() => {
+  const handleTest = useCallback(async () => {
     setError(null);
     setTruncated(false);
+    setProcessing(true);
 
     const validation = validatePattern(pattern, flagsStr);
     if (!validation.valid) {
       setError(validation.error || t("tools.regex-tester.error.invalidPattern"));
       setResults(null);
+      setProcessing(false);
       return;
     }
 
-    const result = regexWorkerHandler({ pattern, flags: flagsStr, text });
-    setResults(result);
-    if (result.truncated) setTruncated(true);
-    if (result.error) setError(result.error);
+    try {
+      const out = (await managerRef.current!.execute(
+        { pattern, flags: flagsStr, text },
+        REGEX_TIMEOUT_MS
+      )) as RegexWorkerOutput;
+      setResults(out);
+      if (out.truncated) setTruncated(true);
+      if (out.error) setError(out.error);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setResults(null);
+    } finally {
+      setProcessing(false);
+    }
   }, [pattern, flagsStr, text, t]);
 
   return (
@@ -82,7 +106,12 @@ export function RegexTester() {
           <TextareaInput value={text} onChange={setText} placeholder="Test text..." rows={6} />
         </ToolInputPanel>
 
-        <ToolActionBar primaryLabel={t("tools.regex-tester.test")} onPrimary={handleTest} primaryDisabled={!pattern} />
+        <ToolActionBar
+          primaryLabel={t("tools.regex-tester.test")}
+          onPrimary={handleTest}
+          primaryDisabled={!pattern || processing}
+          processing={processing}
+        />
 
         {error && (
           <div role="alert" className="rounded-md border border-error bg-error/10 p-2 text-sm text-error">{error}</div>
