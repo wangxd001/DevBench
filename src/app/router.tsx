@@ -6,6 +6,7 @@ import { ToolDetail } from '@/features/tools/ToolDetail';
 import { FavoritesPage } from '@/features/favorites';
 import { RecentPage } from '@/features/recent';
 import { PrivacyPage } from '@/features/privacy';
+import { SearchPage } from '@/features/search';
 import { NotFoundPage } from '@/features/not-found';
 
 export function AppRoutes() {
@@ -18,6 +19,7 @@ export function AppRoutes() {
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="/recent" element={<RecentPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { usePreferencesStore } from '@/stores/preferences-store';
 
 export function TopBar() {
@@ -5,8 +6,17 @@ export function TopBar() {
 
   return (
     <header className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
-      <div className="text-sm text-text-secondary">
-        开发者与测试人员工具箱
+      <div className="flex items-center gap-3">
+        <span className="text-sm text-text-secondary">
+          开发者与测试人员工具箱
+        </span>
+        <Link
+          to="/search"
+          className="rounded-md px-2 py-1 text-sm text-text-secondary hover:bg-surface-muted"
+          aria-label="搜索工具"
+        >
+          🔍
+        </Link>
       </div>
       <div className="flex items-center gap-2">
         <button

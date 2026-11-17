@@ -44,6 +44,25 @@
     "description": "The page you visited does not exist or the tool is not yet implemented.",
     "backHome": "Back to Home"
   },
+  "search": {
+    "title": "Search Tools",
+    "placeholder": "Search tool name, keywords, or description…",
+    "ariaLabel": "Search tools",
+    "hint": "Cmd+K",
+    "resultCountSuffix": " result(s)",
+    "noResult": "No tools found",
+    "viewAll": "Browse full tool catalog"
+  },
+  "favorites": {
+    "empty": "No favorite tools yet",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "remove": "Remove favorite"
+  },
+  "recent": {
+    "empty": "No recent tools",
+    "clear": "Clear"
+  },
   "privacy": {
     "title": "Privacy & Security",
     "items": {

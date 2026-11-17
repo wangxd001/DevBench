@@ -44,6 +44,25 @@
     "description": "您访问的页面不存在或工具尚未实现。",
     "backHome": "返回首页"
   },
+  "search": {
+    "title": "搜索工具",
+    "placeholder": "搜索工具名称、关键词或描述…",
+    "ariaLabel": "搜索工具",
+    "hint": "Ctrl+K",
+    "resultCountSuffix": " 个结果",
+    "noResult": "未找到相关工具",
+    "viewAll": "浏览完整工具目录"
+  },
+  "favorites": {
+    "empty": "还没有收藏任何工具",
+    "pin": "置顶",
+    "unpin": "取消置顶",
+    "remove": "移除收藏"
+  },
+  "recent": {
+    "empty": "还没有使用记录",
+    "clear": "清空"
+  },
   "privacy": {
     "title": "隐私与安全",
     "items": {

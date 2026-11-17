@@ -9,25 +9,46 @@
 React、TypeScript、Vite、Tailwind CSS、Radix UI、Zustand、React Router、CodeMirror 6、Vitest、React Testing Library、Playwright、axe-core、vite-plugin-pwa、Workbox、date-fns；按需 date-fns-tz。
 
 ## 3. 模块边界
-- App / Router / Providers
-- Layout、Navigation、Search、Common UI、Editor、Feedback
-- Features：Home、Tools、Favorites、Recent、Privacy
-- Tools：Registry 与 data、datetime、encoding、generator、http、text 分类
-- Stores：Preferences、Favorites、Recent
-- Lib：Storage、Security、Worker、Utils
-- i18n、Styles、Types
+- **App / Router / Providers**：`src/app/`，含路由配置和 i18n provider
+- **Layout**：`src/components/layout/`，AppShell、Sidebar、TopBar（含搜索入口）、ToolPageLayout
+- **Features**：`src/features/`
+  - `home`、`tools`（目录 + ToolDetail）、`search`（全局搜索，Ctrl+K）、`favorites`、`recent`、`privacy`、`not-found`
+- **Tools**：`src/tools/`，registry（`tools.ts`、`types.ts`、`constants.ts`、`validate.ts`）及 6 个分类目录（data、datetime、encoding、generator、http、text），共 20 个工具
+- **Stores**：`src/stores/`，`preferences-store`（主题/语言，LocalStorage 持久化）、`favorites-store`（收藏/置顶，LocalStorage 持久化）、`recent-tools-store`（最近使用，LocalStorage 持久化，最多 10 条）
+- **Lib**：`src/lib/`，worker 基础设施
+- **i18n**：`src/i18n/locales/`，zh-CN.json + en-US.json
+- **Types**：`src/types/`，Locale、ThemeMode、LocalizedText、LocalizedKeywords
 
 ## 4. 工具注册中心
-注册中心为工具元数据唯一来源，驱动首页、目录、分类、搜索、收藏、最近使用、相关工具和路由。维护元数据类型、运行时/测试校验与关联关系。禁止在多个页面重复维护清单。
+`src/tools/registry/tools.ts` 为工具元数据唯一来源。
+- 驱动：路由（React Router lazy）、工具目录页、搜索（`searchTools` 纯函数）、收藏、最近使用、相关工具
+- 校验：`validate.ts` 在测试中验证 ID 唯一、路由唯一、分类/标签存在、中英文名称完整、relatedTools 合法
+- 禁止在多个页面重复维护工具清单
 
 ## 5. 状态和隐私边界
-全局状态只保存非敏感偏好、收藏/置顶、最近使用。输入和结果仅在当前工具页面局部状态中；不得进入持久化存储、URL、日志、缓存、全局 Store 或网络请求。
+| Store | 持久化位置 | 内容 |
+|---|---|---|
+| `preferences-store` | LocalStorage `devbench.preferences` | 主题（light/dark）、语言（zh-CN/en-US） |
+| `favorites-store` | LocalStorage `devbench.favorites` | 收藏工具 ID 列表、置顶工具 ID 列表 |
+| `recent-tools-store` | LocalStorage `devbench.recent` | 最近使用工具（最多 10 条，含 toolId + lastUsedAt） |
+
+**红线**：工具输入和处理结果只存在于 React 局部 state，不得进入任何 Store、LocalStorage、URL、日志、Service Worker Cache 或网络请求。
 
 ## 6. Worker
-Regex 必须使用 Web Worker 并设置超时。其他工具是否使用 Worker，由真实设备性能测试决定。记录 Worker 初始化、执行、异常、超时、取消和终止的处理方式。
+- `regex-tester`：当前实现为纯函数 `regexWorkerHandler`（`src/tools/text/regex-tester/`），未使用真实 Web Worker；生产环境性能需真实设备验证后再决定是否升级为 Worker 隔离。
+- `hash-generator`：当前在主线程执行；Web Worker 隔离尚未实现。
+- 其他工具是否使用 Worker 由真实性能测试决定。
 
 ## 7. PWA 与缓存
-记录 Workbox 缓存策略、必要资源清单、离线 fallback、未访问工具路由离线可达性、更新流程和缓存清理。严禁缓存用户输入和结果。
+- 使用 `vite-plugin-pwa`（`registerType: 'prompt'`）
+- Workbox 缓存策略：`navigateFallback: '/index.html'`，静态资源 `CacheFirst`（maxEntries: 100）
+- Manifest icons：SVG（192x192、512x512），存放在 `public/icon-*.svg`
+- 用户输入和结果绝不进入 Service Worker Cache
+- 更新流程：用户确认刷新后应用新缓存，提示须说明刷新会清空当前工具输入和结果
 
 ## 8. 决策记录
-每项架构决策记录背景、选项、选择、影响、PRD 依据和日期。不得用架构决策覆盖 PRD。
+| 日期 | 决策 | 背景 | PRD 依据 |
+|---|---|---|---|
+| 2026-11-17 | vitest.config.ts 配置 `pool: 'vmThreads'` | vitest 5.1.0 默认 forks pool 有 bug，测试收集失败 | - |
+| 2026-11-17 | 全局搜索用独立路由 `/search` 而非 TopBar 内嵌下拉 | 移动端适配更自然，无结果目录入口易组织 | PRD §4.3 |
+| 2026-11-17 | PWA manifest 用 SVG 图标 | 无 PNG 生成工具，SVG 在现代浏览器中受 manifest 支持 | - |
