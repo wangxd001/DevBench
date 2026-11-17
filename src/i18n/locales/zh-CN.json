@@ -225,6 +225,18 @@
         "text": "文本",
         "entity": "HTML 实体"
       }
+    },
+    "datetime-formatter": {
+      "name": "日期时间格式化",
+      "description": "格式化日期时间为指定格式",
+      "input": "日期时间",
+      "preset": "格式",
+      "preset.iso": "ISO 8601",
+      "preset.local": "本地时间",
+      "preset.utc": "UTC",
+      "preset.custom": "自定义",
+      "customPattern": "自定义格式（如 yyyy-MM-dd HH:mm:ss）",
+      "format": "格式化"
     }
   }
 }

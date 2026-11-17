@@ -13,6 +13,7 @@ const JsonDiff = lazy(() => import("@/tools/data/json-diff").then(m => ({ defaul
 const RandomStringGenerator = lazy(() => import("@/tools/generator/random-string-generator").then(m => ({ default: m.RandomStringGenerator })));
 const UnicodeConverter = lazy(() => import("@/tools/encoding/unicode-converter").then(m => ({ default: m.UnicodeConverter })));
 const HtmlEntityConverter = lazy(() => import("@/tools/encoding/html-entity-converter").then(m => ({ default: m.HtmlEntityConverter })));
+const DatetimeFormatter = lazy(() => import("@/tools/datetime/datetime-formatter").then(m => ({ default: m.DatetimeFormatter })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -164,16 +165,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["base64-converter", "uuid-generator", "random-string-generator"],
   },
-  "datetime-formatter": {
+"datetime-formatter": {
     id: "datetime-formatter",
     name: { "zh-CN": "日期时间格式化", "en-US": "Datetime Formatter" },
-    description: { "zh-CN": "格式化日期时间", "en-US": "Format dates and times" },
+    description: { "zh-CN": "格式化日期时间为指定格式", "en-US": "Format dates and times" },
     categoryId: "datetime",
     tags: ["datetime", "conversion"],
     keywords: { "zh-CN": ["日期", "格式化", "时间"], "en-US": ["date", "format", "time"] },
     icon: "calendar",
     route: "/tools/datetime-formatter",
-    component: ComingSoon,
+    component: DatetimeFormatter,
     recommended: false,
     relatedTools: ["timestamp-converter", "date-calculator"],
   },

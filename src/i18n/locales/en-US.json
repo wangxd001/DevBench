@@ -225,6 +225,18 @@
         "text": "Text",
         "entity": "HTML Entities"
       }
+    },
+    "datetime-formatter": {
+      "name": "Datetime Formatter",
+      "description": "Format dates and times",
+      "input": "Date/Time",
+      "preset": "Format",
+      "preset.iso": "ISO 8601",
+      "preset.local": "Local Time",
+      "preset.utc": "UTC",
+      "preset.custom": "Custom",
+      "customPattern": "Custom pattern (e.g. yyyy-MM-dd HH:mm:ss)",
+      "format": "Format"
     }
   }
 }
