@@ -1,11 +1,41 @@
 {
-  "app": { "title": "DevBench", "subtitle": "Developer & Tester Toolbox" },
-  "nav": { "home": "Home", "tools": "Tools", "favorites": "Favorites", "recent": "Recent", "privacy": "Privacy & Security" },
-  "tool": { "notImplemented": "Tool not yet implemented", "comingSoon": "Tool coming soon" },
-  "common": { "copy": "Copy", "copied": "Copied", "clear": "Clear", "processing": "Processing", "error": "Error", "empty": "Nothing here yet" },
-  "theme": { "light": "Light", "dark": "Dark" },
-  "language": { "zh-CN": "简体中文", "en-US": "English" },
-  "notFound": { "title": "Page not found", "description": "The page you visited does not exist or the tool is not yet implemented.", "backHome": "Back to Home" },
+  "app": {
+    "title": "DevBench",
+    "subtitle": "Developer & Tester Toolbox"
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "favorites": "Favorites",
+    "recent": "Recent",
+    "privacy": "Privacy & Security"
+  },
+  "tool": {
+    "notImplemented": "Tool not yet implemented",
+    "comingSoon": "Tool coming soon"
+  },
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "clear": "Clear",
+    "processing": "Processing",
+    "error": "Error",
+    "empty": "Nothing here yet",
+    "copyError": "Copy failed"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "zh-CN": "简体中文",
+    "en-US": "English"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you visited does not exist or the tool is not yet implemented.",
+    "backHome": "Back to Home"
+  },
   "privacy": {
     "title": "Privacy & Security",
     "items": {
@@ -15,6 +45,18 @@
       "noPersist": "User input and results are not actively persisted",
       "browserRisk": "Browser extensions, malicious scripts, and device environments may still affect data security",
       "hostingMeta": "The hosting platform may process network metadata required for normal static resource requests"
+    }
+  },
+  "tools": {
+    "uuid-generator": {
+      "name": "UUID Generator",
+      "description": "Generate UUID v4 identifiers",
+      "count": "Count",
+      "generate": "Generate",
+      "copyAll": "Copy All",
+      "copyOne": "Copy",
+      "empty": "Click generate to create UUIDs",
+      "countError": "Count must be between 1 and 100"
     }
   }
 }

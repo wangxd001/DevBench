@@ -22,7 +22,7 @@ export function createWorker(
   let cancelled = false;
 
   function getWorker(): Worker {
-    if (!worker || !worker instanceof Worker) {
+    if (!worker) {
       worker = workerFactory();
       worker.onmessage = (event: MessageEvent) => {
         const { id, result, error } = event.data as { id: number; result?: unknown; error?: string };
