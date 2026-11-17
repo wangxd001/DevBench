@@ -285,6 +285,27 @@
       "generate": "生成",
       "copyAll": "复制 JSON",
       "result": "生成结果"
+    },
+    "text-diff": {
+      "name": "文本 Diff 比对",
+      "description": "比较两段文本的行级差异",
+      "left": "原始文本",
+      "right": "修改后文本",
+      "compare": "比对",
+      "caseSensitive": "区分大小写",
+      "ignoreWhitespace": "忽略空白",
+      "noDiff": "两段文本完全相同"
+    },
+    "json-yaml-converter": {
+      "name": "JSON / YAML 转换",
+      "description": "JSON 与 YAML 双向转换",
+      "input": {
+        "json": "JSON 输入",
+        "yaml": "YAML 输入"
+      },
+      "toYaml": "转 YAML",
+      "toJson": "转 JSON",
+      "error.tooLarge": "输入超过 2 MB 限制"
     }
   }
 }

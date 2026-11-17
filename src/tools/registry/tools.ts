@@ -18,7 +18,8 @@ const DateCalculator = lazy(() => import("@/tools/datetime/date-calculator").the
 const HashGenerator = lazy(() => import("@/tools/encoding/hash-generator").then(m => ({ default: m.HashGenerator })));
 const HttpCookieParser = lazy(() => import("@/tools/http/http-cookie-parser").then(m => ({ default: m.HttpCookieParser })));
 const TestDataGenerator = lazy(() => import("@/tools/generator/test-data-generator").then(m => ({ default: m.TestDataGenerator })));
-const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
+const TextDiff = lazy(() => import("@/tools/text/text-diff").then(m => ({ default: m.TextDiff })));
+const JsonYamlConverter = lazy(() => import("@/tools/data/json-yaml-converter").then(m => ({ default: m.JsonYamlConverter })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -247,16 +248,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["unicode-converter", "url-encoder", "base64-converter"],
   },
-  "json-yaml-converter": {
+"json-yaml-converter": {
     id: "json-yaml-converter",
     name: { "zh-CN": "JSON / YAML 转换", "en-US": "JSON / YAML Converter" },
-    description: { "zh-CN": "JSON 与 YAML 互转", "en-US": "Convert between JSON and YAML" },
+    description: { "zh-CN": "JSON 与 YAML 双向转换", "en-US": "Convert between JSON and YAML" },
     categoryId: "data",
     tags: ["json", "yaml", "conversion"],
     keywords: { "zh-CN": ["json", "yaml", "转换"], "en-US": ["json", "yaml", "convert"] },
     icon: "file",
     route: "/tools/json-yaml-converter",
-    component: ComingSoon,
+    component: JsonYamlConverter,
     recommended: false,
     relatedTools: ["json-formatter", "json-diff", "text-diff"],
   },
@@ -273,16 +274,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["http-header-parser", "jwt-decoder", "base64-converter"],
   },
-  "text-diff": {
+"text-diff": {
     id: "text-diff",
     name: { "zh-CN": "文本 Diff 比对", "en-US": "Text Diff" },
-    description: { "zh-CN": "比较两段文本的差异", "en-US": "Compare differences between two texts" },
+    description: { "zh-CN": "比较两段文本的行级差异", "en-US": "Compare line-level differences between two texts" },
     categoryId: "text",
     tags: ["text", "comparison", "diff"],
     keywords: { "zh-CN": ["文本", "diff", "比对"], "en-US": ["text", "diff", "compare"] },
     icon: "diff",
     route: "/tools/text-diff",
-    component: ComingSoon,
+    component: TextDiff,
     recommended: false,
     relatedTools: ["json-diff", "regex-tester", "json-formatter"],
   },

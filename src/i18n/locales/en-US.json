@@ -285,6 +285,27 @@
       "generate": "Generate",
       "copyAll": "Copy JSON",
       "result": "Generated Data"
+    },
+    "text-diff": {
+      "name": "Text Diff",
+      "description": "Compare line-level differences between two texts",
+      "left": "Original",
+      "right": "Modified",
+      "compare": "Compare",
+      "caseSensitive": "Case Sensitive",
+      "ignoreWhitespace": "Ignore Whitespace",
+      "noDiff": "Texts are identical"
+    },
+    "json-yaml-converter": {
+      "name": "JSON / YAML Converter",
+      "description": "Convert between JSON and YAML",
+      "input": {
+        "json": "JSON Input",
+        "yaml": "YAML Input"
+      },
+      "toYaml": "To YAML",
+      "toJson": "To JSON",
+      "error.tooLarge": "Input exceeds 2 MB limit"
     }
   }
 }
