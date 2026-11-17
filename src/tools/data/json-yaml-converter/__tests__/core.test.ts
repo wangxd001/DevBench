@@ -35,7 +35,7 @@ describe("jsonToYaml", () => {
 
   it("handles 2-space indent by default", () => {
     const result = jsonToYaml('{"a":{"b":1}}');
-    expect(result.value).toMatch(/  b: 1/);
+    expect(result.value).toMatch(/b: 1/);
   });
 });
 

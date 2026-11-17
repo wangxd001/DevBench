@@ -41,16 +41,16 @@ export function dateDiff(fromStr: string, toStr: string): DateDiffResult {
   const totalDays = Math.round(msDiff / 86400000);
 
   // 日历分解
-  let years = 0;
-  let months = 0;
-  let days = 0;
+  let years: number;
+  let months: number;
+  let days: number;
 
+  const y = from.getUTCFullYear();
+  const m = from.getUTCMonth();
+  const d = from.getUTCDate();
   const absTotal = Math.abs(totalDays);
   const sign = totalDays < 0 ? -1 : 1;
 
-  let y = from.getUTCFullYear();
-  let m = from.getUTCMonth();
-  let d = from.getUTCDate();
 
   if (absTotal > 365) {
     years = Math.floor(absTotal / 365.25);

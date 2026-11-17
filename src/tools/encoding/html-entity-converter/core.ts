@@ -43,12 +43,7 @@ export function textToHtmlEntity(text: string): string {
       case '"': result += "&quot;"; break;
       case "'": result += "&#39;"; break;
       default:
-        const code = char.codePointAt(0)!;
-        if (code > 0x7e) {
-          result += char;
-        } else {
-          result += char;
-        }
+        result += char;
     }
   }
   return result;

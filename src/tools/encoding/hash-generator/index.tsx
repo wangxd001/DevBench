@@ -25,7 +25,7 @@ export function HashGenerator() {
 
   const handleCopy = useCallback(async () => {
     if (result?.value) {
-      try { await navigator.clipboard.writeText(result.value); } catch {}
+      try { await navigator.clipboard.writeText(result.value); } catch { /* ignore */ }
     }
   }, [result]);
 
