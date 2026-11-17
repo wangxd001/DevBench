@@ -3,7 +3,7 @@ import { validatePattern } from "../core";
 
 describe("validatePattern", () => {
   it("validates correct pattern", () => {
-    const result = validatePattern("\d+", "g");
+    const result = validatePattern("\\d+", "g");
     expect(result.valid).toBe(true);
   });
 
