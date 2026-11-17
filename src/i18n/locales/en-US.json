@@ -8,7 +8,10 @@
     "tools": "Tools",
     "favorites": "Favorites",
     "recent": "Recent",
-    "privacy": "Privacy & Security"
+    "privacy": "Privacy & Security",
+    "category": {
+      "encoding": "Encoding & Hash"
+    }
   },
   "tool": {
     "notImplemented": "Tool not yet implemented",
@@ -57,6 +60,17 @@
       "copyOne": "Copy",
       "empty": "Click generate to create UUIDs",
       "countError": "Count must be between 1 and 100"
+    },
+    "url-encoder": {
+      "name": "URL Encoder/Decoder",
+      "description": "URL, URI and component encoding/decoding",
+      "mode": "Mode",
+      "mode.encode": "Encode",
+      "mode.decode": "Decode",
+      "type": "Type",
+      "type.component": "Component",
+      "input": "Input",
+      "result": "Result"
     }
   }
 }

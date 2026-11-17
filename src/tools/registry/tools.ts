@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import type { ToolDefinition, ToolId } from "./types";
 
+const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => ({ default: m.UrlEncoder })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -22,5 +23,24 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: UuidGenerator,
     recommended: true,
     relatedTools: ["random-string-generator", "test-data-generator", "hash-generator"],
+  },
+  "url-encoder": {
+    id: "url-encoder",
+    name: { "zh-CN": "URL 编解码", "en-US": "URL Encoder/Decoder" },
+    description: {
+      "zh-CN": "URL、URI 和组件的编解码",
+      "en-US": "URL, URI and component encoding/decoding"
+    },
+    categoryId: "encoding",
+    tags: ["encoding", "decoding"],
+    keywords: {
+      "zh-CN": ["url", "编码", "解码", "uri"],
+      "en-US": ["url", "encode", "decode", "uri"]
+    },
+    icon: "link",
+    route: "/tools/url-encoder",
+    component: UrlEncoder,
+    recommended: false,
+    relatedTools: ["base64-converter", "unicode-converter", "html-entity-converter"],
   },
 };
