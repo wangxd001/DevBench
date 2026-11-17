@@ -10,7 +10,8 @@
     "recent": "最近使用",
     "privacy": "隐私与安全",
     "category": {
-      "encoding": "编码与哈希"
+      "encoding": "编码与哈希",
+      "http": "HTTP 与 Web"
     }
   },
   "tool": {
@@ -71,6 +72,19 @@
       "type.component": "组件",
       "input": "输入",
       "result": "结果"
+    },
+    "http-status-codes": {
+      "name": "HTTP 状态码查询",
+      "description": "查询 HTTP 状态码含义",
+      "search": "搜索状态码（编码、名称或关键词）",
+      "empty": "没有匹配的状态码",
+      "category": {
+        "1xx": "1xx 信息",
+        "2xx": "2xx 成功",
+        "3xx": "3xx 重定向",
+        "4xx": "4xx 客户端错误",
+        "5xx": "5xx 服务器错误"
+      }
     }
   }
 }

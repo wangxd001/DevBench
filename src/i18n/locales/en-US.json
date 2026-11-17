@@ -10,7 +10,8 @@
     "recent": "Recent",
     "privacy": "Privacy & Security",
     "category": {
-      "encoding": "Encoding & Hash"
+      "encoding": "Encoding & Hash",
+      "http": "HTTP & Web"
     }
   },
   "tool": {
@@ -71,6 +72,19 @@
       "type.component": "Component",
       "input": "Input",
       "result": "Result"
+    },
+    "http-status-codes": {
+      "name": "HTTP Status Codes",
+      "description": "Look up HTTP status code meanings",
+      "search": "Search status code (code, name or keyword)",
+      "empty": "No matching status codes",
+      "category": {
+        "1xx": "1xx Informational",
+        "2xx": "2xx Success",
+        "3xx": "3xx Redirect",
+        "4xx": "4xx Client Error",
+        "5xx": "5xx Server Error"
+      }
     }
   }
 }

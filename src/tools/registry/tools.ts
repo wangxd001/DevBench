@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import type { ToolDefinition, ToolId } from "./types";
 
+const HttpStatusCodes = lazy(() => import("@/tools/http/http-status-codes").then(m => ({ default: m.HttpStatusCodes })));
 const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => ({ default: m.UrlEncoder })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -23,6 +24,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: UuidGenerator,
     recommended: true,
     relatedTools: ["random-string-generator", "test-data-generator", "hash-generator"],
+  },
+  "http-status-codes": {
+    id: "http-status-codes",
+    name: { "zh-CN": "HTTP 状态码查询", "en-US": "HTTP Status Codes" },
+    description: {
+      "zh-CN": "查询 HTTP 状态码含义",
+      "en-US": "Look up HTTP status code meanings"
+    },
+    categoryId: "http",
+    tags: ["http", "web"],
+    keywords: {
+      "zh-CN": ["http", "状态码", "查询"],
+      "en-US": ["http", "status", "code"]
+    },
+    icon: "list",
+    route: "/tools/http-status-codes",
+    component: HttpStatusCodes,
+    recommended: false,
+    relatedTools: ["http-header-parser", "http-cookie-parser", "jwt-decoder"],
   },
   "url-encoder": {
     id: "url-encoder",
