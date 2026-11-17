@@ -5,6 +5,7 @@ const HttpStatusCodes = lazy(() => import("@/tools/http/http-status-codes").then
 const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => ({ default: m.UrlEncoder })));
 const TimestampConverter = lazy(() => import("@/tools/datetime/timestamp-converter").then(m => ({ default: m.TimestampConverter })));
 const Base64Converter = lazy(() => import("@/tools/encoding/base64-converter").then(m => ({ default: m.Base64Converter })));
+const HttpHeaderParser = lazy(() => import("@/tools/http/http-header-parser").then(m => ({ default: m.HttpHeaderParser })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -45,6 +46,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: Base64Converter,
     recommended: false,
     relatedTools: ["url-encoder", "unicode-converter", "html-entity-converter"],
+  },
+  "http-header-parser": {
+    id: "http-header-parser",
+    name: { "zh-CN": "HTTP Header 解析器", "en-US": "HTTP Header Parser" },
+    description: {
+      "zh-CN": "解析原始 HTTP Header",
+      "en-US": "Parse raw HTTP headers"
+    },
+    categoryId: "http",
+    tags: ["http", "web"],
+    keywords: {
+      "zh-CN": ["http", "header", "解析"],
+      "en-US": ["http", "header", "parse"]
+    },
+    icon: "header",
+    route: "/tools/http-header-parser",
+    component: HttpHeaderParser,
+    recommended: false,
+    relatedTools: ["http-cookie-parser", "jwt-decoder", "http-status-codes"],
   },
   "uuid-generator": {
     id: "uuid-generator",

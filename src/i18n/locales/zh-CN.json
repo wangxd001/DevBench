@@ -123,6 +123,14 @@
       },
       "error.invalid": "非法 Base64 输入",
       "error.tooLarge": "输入超过 5 MB 限制"
+    },
+    "http-header-parser": {
+      "name": "HTTP Header 解析器",
+      "description": "解析原始 HTTP Header",
+      "input": "HTTP Header",
+      "parse": "解析",
+      "empty": "没有可解析的 Header",
+      "error.invalidLine": "第 {{line}} 行无效：缺少冒号"
     }
   }
 }

@@ -123,6 +123,14 @@
       },
       "error.invalid": "Invalid Base64 input",
       "error.tooLarge": "Input exceeds 5 MB limit"
+    },
+    "http-header-parser": {
+      "name": "HTTP Header Parser",
+      "description": "Parse raw HTTP headers",
+      "input": "HTTP Headers",
+      "parse": "Parse",
+      "empty": "No headers to parse",
+      "error.invalidLine": "Line {{line}} invalid: missing colon"
     }
   }
 }
