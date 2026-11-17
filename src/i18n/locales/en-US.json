@@ -195,6 +195,22 @@
       "generate": "Generate",
       "copyAll": "Copy All",
       "error.emptyCharset": "Character set cannot be empty"
+    },
+    "unicode-converter": {
+      "name": "Unicode Converter",
+      "description": "Convert between Unicode escapes and text",
+      "mode": "Mode",
+      "mode.toUnicode": "Text to Unicode",
+      "mode.toText": "Unicode to Text",
+      "input": {
+        "text": "Text",
+        "unicode": "Unicode Escapes"
+      },
+      "result": {
+        "text": "Text",
+        "unicode": "Unicode Escapes"
+      },
+      "error.invalid": "Invalid Unicode escape sequence"
     }
   }
 }

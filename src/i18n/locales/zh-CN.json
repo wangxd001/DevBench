@@ -195,6 +195,22 @@
       "generate": "生成",
       "copyAll": "复制全部",
       "error.emptyCharset": "字符集不能为空"
+    },
+    "unicode-converter": {
+      "name": "Unicode 编解码",
+      "description": "Unicode 转义与普通文本互转",
+      "mode": "模式",
+      "mode.toUnicode": "文本 → Unicode",
+      "mode.toText": "Unicode → 文本",
+      "input": {
+        "text": "文本",
+        "unicode": "Unicode 转义"
+      },
+      "result": {
+        "text": "文本",
+        "unicode": "Unicode 转义"
+      },
+      "error.invalid": "无效的 Unicode 转义序列"
     }
   }
 }

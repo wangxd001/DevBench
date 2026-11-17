@@ -11,6 +11,7 @@ const JsonFormatter = lazy(() => import("@/tools/data/json-formatter").then(m =>
 const RegexTester = lazy(() => import("@/tools/text/regex-tester").then(m => ({ default: m.RegexTester })));
 const JsonDiff = lazy(() => import("@/tools/data/json-diff").then(m => ({ default: m.JsonDiff })));
 const RandomStringGenerator = lazy(() => import("@/tools/generator/random-string-generator").then(m => ({ default: m.RandomStringGenerator })));
+const UnicodeConverter = lazy(() => import("@/tools/encoding/unicode-converter").then(m => ({ default: m.UnicodeConverter })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -214,7 +215,7 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["uuid-generator", "random-string-generator", "json-formatter"],
   },
-  "unicode-converter": {
+"unicode-converter": {
     id: "unicode-converter",
     name: { "zh-CN": "Unicode 编解码", "en-US": "Unicode Converter" },
     description: { "zh-CN": "Unicode 转义与普通文本互转", "en-US": "Convert between Unicode escapes and text" },
@@ -223,7 +224,7 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     keywords: { "zh-CN": ["unicode", "编码", "解码"], "en-US": ["unicode", "encode", "decode"] },
     icon: "globe",
     route: "/tools/unicode-converter",
-    component: ComingSoon,
+    component: UnicodeConverter,
     recommended: false,
     relatedTools: ["html-entity-converter", "url-encoder", "base64-converter"],
   },
