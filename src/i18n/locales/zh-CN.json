@@ -237,6 +237,21 @@
       "preset.custom": "自定义",
       "customPattern": "自定义格式（如 yyyy-MM-dd HH:mm:ss）",
       "format": "格式化"
+    },
+    "date-calculator": {
+      "name": "日期计算器",
+      "description": "计算日期差值和日期加减",
+      "mode.add": "加天数",
+      "mode.subtract": "减天数",
+      "mode.diff": "日期差",
+      "date": "日期",
+      "days": "天数",
+      "from": "起始日期",
+      "to": "结束日期",
+      "calculate": "计算",
+      "totalDays": "总天数",
+      "years": "年",
+      "months": "月"
     }
   }
 }

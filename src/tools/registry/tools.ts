@@ -14,6 +14,7 @@ const RandomStringGenerator = lazy(() => import("@/tools/generator/random-string
 const UnicodeConverter = lazy(() => import("@/tools/encoding/unicode-converter").then(m => ({ default: m.UnicodeConverter })));
 const HtmlEntityConverter = lazy(() => import("@/tools/encoding/html-entity-converter").then(m => ({ default: m.HtmlEntityConverter })));
 const DatetimeFormatter = lazy(() => import("@/tools/datetime/datetime-formatter").then(m => ({ default: m.DatetimeFormatter })));
+const DateCalculator = lazy(() => import("@/tools/datetime/date-calculator").then(m => ({ default: m.DateCalculator })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -178,16 +179,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["timestamp-converter", "date-calculator"],
   },
-  "date-calculator": {
+"date-calculator": {
     id: "date-calculator",
     name: { "zh-CN": "日期计算器", "en-US": "Date Calculator" },
-    description: { "zh-CN": "计算日期差值", "en-US": "Calculate date differences" },
+    description: { "zh-CN": "计算日期差值和日期加减", "en-US": "Calculate date differences and add/subtract days" },
     categoryId: "datetime",
     tags: ["datetime", "calculation"],
     keywords: { "zh-CN": ["日期", "计算", "差值"], "en-US": ["date", "calculate", "difference"] },
     icon: "calculator",
     route: "/tools/date-calculator",
-    component: ComingSoon,
+    component: DateCalculator,
     recommended: false,
     relatedTools: ["datetime-formatter", "timestamp-converter"],
   },

@@ -237,6 +237,21 @@
       "preset.custom": "Custom",
       "customPattern": "Custom pattern (e.g. yyyy-MM-dd HH:mm:ss)",
       "format": "Format"
+    },
+    "date-calculator": {
+      "name": "Date Calculator",
+      "description": "Calculate date differences and add/subtract days",
+      "mode.add": "Add Days",
+      "mode.subtract": "Subtract Days",
+      "mode.diff": "Date Diff",
+      "date": "Date",
+      "days": "Days",
+      "from": "Start Date",
+      "to": "End Date",
+      "calculate": "Calculate",
+      "totalDays": "Total Days",
+      "years": "Years",
+      "months": "Months"
     }
   }
 }
