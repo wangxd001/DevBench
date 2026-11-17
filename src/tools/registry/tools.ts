@@ -3,9 +3,29 @@ import type { ToolDefinition, ToolId } from "./types";
 
 const HttpStatusCodes = lazy(() => import("@/tools/http/http-status-codes").then(m => ({ default: m.HttpStatusCodes })));
 const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => ({ default: m.UrlEncoder })));
+const TimestampConverter = lazy(() => import("@/tools/datetime/timestamp-converter").then(m => ({ default: m.TimestampConverter })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
+  "timestamp-converter": {
+    id: "timestamp-converter",
+    name: { "zh-CN": "时间戳转换器", "en-US": "Timestamp Converter" },
+    description: {
+      "zh-CN": "时间戳与日期时间互转",
+      "en-US": "Convert between timestamps and dates"
+    },
+    categoryId: "datetime",
+    tags: ["datetime", "conversion"],
+    keywords: {
+      "zh-CN": ["时间戳", "转换", "日期"],
+      "en-US": ["timestamp", "convert", "date"]
+    },
+    icon: "clock",
+    route: "/tools/timestamp-converter",
+    component: TimestampConverter,
+    recommended: true,
+    relatedTools: ["datetime-formatter", "date-calculator"],
+  },
   "uuid-generator": {
     id: "uuid-generator",
     name: { "zh-CN": "UUID 生成器", "en-US": "UUID Generator" },

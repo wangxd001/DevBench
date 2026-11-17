@@ -11,7 +11,8 @@
     "privacy": "隐私与安全",
     "category": {
       "encoding": "编码与哈希",
-      "http": "HTTP 与 Web"
+      "http": "HTTP 与 Web",
+      "datetime": "日期与时间"
     }
   },
   "tool": {
@@ -85,6 +86,23 @@
         "4xx": "4xx 客户端错误",
         "5xx": "5xx 服务器错误"
       }
+    },
+    "timestamp-converter": {
+      "name": "时间戳转换器",
+      "description": "时间戳与日期时间互转",
+      "unit": "时间戳单位",
+      "unit.seconds": "秒",
+      "unit.milliseconds": "毫秒",
+      "format": "显示格式",
+      "local": "本地时间",
+      "utc": "UTC",
+      "iso": "ISO 8601",
+      "tsLabel": "时间戳",
+      "dateLabel": "日期时间",
+      "convert": "转换",
+      "now": "当前时间",
+      "invalid": "无效的时间戳（必须是正整数）",
+      "invalidDate": "无效的日期时间"
     }
   }
 }

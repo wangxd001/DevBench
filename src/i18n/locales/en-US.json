@@ -11,7 +11,8 @@
     "privacy": "Privacy & Security",
     "category": {
       "encoding": "Encoding & Hash",
-      "http": "HTTP & Web"
+      "http": "HTTP & Web",
+      "datetime": "Date & Time"
     }
   },
   "tool": {
@@ -85,6 +86,23 @@
         "4xx": "4xx Client Error",
         "5xx": "5xx Server Error"
       }
+    },
+    "timestamp-converter": {
+      "name": "Timestamp Converter",
+      "description": "Convert between timestamps and dates",
+      "unit": "Timestamp Unit",
+      "unit.seconds": "Seconds",
+      "unit.milliseconds": "Milliseconds",
+      "format": "Display Format",
+      "local": "Local Time",
+      "utc": "UTC",
+      "iso": "ISO 8601",
+      "tsLabel": "Timestamp",
+      "dateLabel": "Date/Time",
+      "convert": "Convert",
+      "now": "Now",
+      "invalid": "Invalid timestamp (must be a positive integer)",
+      "invalidDate": "Invalid date/time"
     }
   }
 }
