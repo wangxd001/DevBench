@@ -4,6 +4,7 @@ import type { ToolDefinition, ToolId } from "./types";
 const HttpStatusCodes = lazy(() => import("@/tools/http/http-status-codes").then(m => ({ default: m.HttpStatusCodes })));
 const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => ({ default: m.UrlEncoder })));
 const TimestampConverter = lazy(() => import("@/tools/datetime/timestamp-converter").then(m => ({ default: m.TimestampConverter })));
+const Base64Converter = lazy(() => import("@/tools/encoding/base64-converter").then(m => ({ default: m.Base64Converter })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -25,6 +26,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: TimestampConverter,
     recommended: true,
     relatedTools: ["datetime-formatter", "date-calculator"],
+  },
+  "base64-converter": {
+    id: "base64-converter",
+    name: { "zh-CN": "Base64 编解码", "en-US": "Base64 Encoder/Decoder" },
+    description: {
+      "zh-CN": "文本与 Base64 互转",
+      "en-US": "Convert between text and Base64"
+    },
+    categoryId: "encoding",
+    tags: ["encoding", "decoding"],
+    keywords: {
+      "zh-CN": ["base64", "编码", "解码"],
+      "en-US": ["base64", "encode", "decode"]
+    },
+    icon: "code",
+    route: "/tools/base64-converter",
+    component: Base64Converter,
+    recommended: false,
+    relatedTools: ["url-encoder", "unicode-converter", "html-entity-converter"],
   },
   "uuid-generator": {
     id: "uuid-generator",

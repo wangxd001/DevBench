@@ -103,6 +103,26 @@
       "now": "Now",
       "invalid": "Invalid timestamp (must be a positive integer)",
       "invalidDate": "Invalid date/time"
+    },
+    "base64-converter": {
+      "name": "Base64 Encoder/Decoder",
+      "description": "Convert between text and Base64",
+      "mode": "Mode",
+      "mode.encode": "Encode",
+      "mode.decode": "Decode",
+      "variant": "Variant",
+      "variant.standard": "Standard",
+      "variant.urlsafe": "URL-safe",
+      "input": {
+        "text": "Text",
+        "base64": "Base64"
+      },
+      "result": {
+        "text": "Text",
+        "base64": "Base64"
+      },
+      "error.invalid": "Invalid Base64 input",
+      "error.tooLarge": "Input exceeds 5 MB limit"
     }
   }
 }
