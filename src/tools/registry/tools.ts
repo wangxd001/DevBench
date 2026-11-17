@@ -8,6 +8,7 @@ const Base64Converter = lazy(() => import("@/tools/encoding/base64-converter").t
 const HttpHeaderParser = lazy(() => import("@/tools/http/http-header-parser").then(m => ({ default: m.HttpHeaderParser })));
 const JwtDecoder = lazy(() => import("@/tools/http/jwt-decoder").then(m => ({ default: m.JwtDecoder })));
 const JsonFormatter = lazy(() => import("@/tools/data/json-formatter").then(m => ({ default: m.JsonFormatter })));
+const RegexTester = lazy(() => import("@/tools/text/regex-tester").then(m => ({ default: m.RegexTester })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -105,6 +106,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: JsonFormatter,
     recommended: true,
     relatedTools: ["json-diff", "json-yaml-converter", "base64-converter"],
+  },
+  "regex-tester": {
+    id: "regex-tester",
+    name: { "zh-CN": "正则表达式测试器", "en-US": "Regex Tester" },
+    description: {
+      "zh-CN": "测试 JavaScript 正则表达式",
+      "en-US": "Test JavaScript regular expressions"
+    },
+    categoryId: "text",
+    tags: ["regex", "testing", "text"],
+    keywords: {
+      "zh-CN": ["正则", "正则表达式", "regex"],
+      "en-US": ["regex", "regular expression", "pattern"]
+    },
+    icon: "search",
+    route: "/tools/regex-tester",
+    component: RegexTester,
+    recommended: false,
+    relatedTools: ["text-diff", "test-data-generator", "json-formatter"],
   },
   "uuid-generator": {
     id: "uuid-generator",

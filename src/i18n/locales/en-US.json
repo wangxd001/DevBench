@@ -13,7 +13,8 @@
       "encoding": "Encoding & Hash",
       "http": "HTTP & Web",
       "datetime": "Date & Time",
-      "data": "Data & JSON"
+      "data": "Data & JSON",
+      "text": "Text & Regex"
     }
   },
   "tool": {
@@ -155,6 +156,18 @@
       "result": "Result",
       "error.tooLarge": "Input exceeds 5 MB limit",
       "error.position": "Line {{line}}, Column {{column}}"
+    },
+    "regex-tester": {
+      "name": "Regex Tester",
+      "description": "Test JavaScript regular expressions",
+      "pattern": "Pattern",
+      "flags": "Flags",
+      "testText": "Test Text",
+      "test": "Test",
+      "matches": "Matches",
+      "noMatch": "No matches found",
+      "truncated": "Results truncated (exceeded 10000)",
+      "error.invalidPattern": "Invalid regular expression"
     }
   }
 }

@@ -13,7 +13,8 @@
       "encoding": "编码与哈希",
       "http": "HTTP 与 Web",
       "datetime": "日期与时间",
-      "data": "数据处理"
+      "data": "数据处理",
+      "text": "文本与正则"
     }
   },
   "tool": {
@@ -155,6 +156,18 @@
       "result": "结果",
       "error.tooLarge": "输入超过 5 MB 限制",
       "error.position": "第 {{line}} 行，第 {{column}} 列"
+    },
+    "regex-tester": {
+      "name": "正则表达式测试器",
+      "description": "测试 JavaScript 正则表达式",
+      "pattern": "正则表达式",
+      "flags": "Flags",
+      "testText": "测试文本",
+      "test": "测试",
+      "matches": "匹配结果",
+      "noMatch": "没有匹配结果",
+      "truncated": "结果已截断（超过 10000 条）",
+      "error.invalidPattern": "无效的正则表达式"
     }
   }
 }
