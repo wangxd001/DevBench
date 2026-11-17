@@ -1,3 +1,4 @@
-export { AppShell } from './AppShell';
-export { Sidebar } from './Sidebar';
-export { TopBar } from './TopBar';
+export { AppShell } from "./AppShell";
+export { Sidebar } from "./Sidebar";
+export { TopBar } from "./TopBar";
+export { ToolPageLayout } from "./ToolPageLayout";
