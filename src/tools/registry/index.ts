@@ -1,0 +1,1 @@
+export { validateRegistry } from './validate';

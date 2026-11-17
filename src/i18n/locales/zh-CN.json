@@ -1,0 +1,20 @@
+{
+  "app": { "title": "DevBench", "subtitle": "开发者与测试人员工具箱" },
+  "nav": { "home": "首页", "tools": "工具目录", "favorites": "收藏", "recent": "最近使用", "privacy": "隐私与安全" },
+  "tool": { "notImplemented": "工具尚未实现", "comingSoon": "工具即将上线" },
+  "common": { "copy": "复制", "copied": "已复制", "clear": "清空", "processing": "处理中", "error": "错误", "empty": "暂无内容" },
+  "theme": { "light": "浅色", "dark": "深色" },
+  "language": { "zh-CN": "简体中文", "en-US": "English" },
+  "notFound": { "title": "页面未找到", "description": "您访问的页面不存在或工具尚未实现。", "backHome": "返回首页" },
+  "privacy": {
+    "title": "隐私与安全",
+    "items": {
+      "local": "工具计算主要在浏览器本地完成",
+      "noUpload": "产品不会主动将用户输入和结果发送到服务器",
+      "noTracking": "产品不接入应用级行为统计",
+      "noPersist": "用户输入和处理结果不会被主动持久化",
+      "browserRisk": "浏览器扩展、恶意脚本、设备本身仍可能影响数据安全",
+      "hostingMeta": "托管平台可能处理正常静态资源请求所需的网络元数据"
+    }
+  }
+}
