@@ -168,6 +168,21 @@
       "noMatch": "No matches found",
       "truncated": "Results truncated (exceeded 10000)",
       "error.invalidPattern": "Invalid regular expression"
+    },
+    "json-diff": {
+      "name": "JSON Diff",
+      "description": "Compare differences between two JSON structures",
+      "left": "Original",
+      "right": "Modified",
+      "compare": "Compare",
+      "noDiff": "JSON structures are identical",
+      "error.tooLarge": "Input exceeds 2 MB limit",
+      "type": {
+        "added": "Added",
+        "removed": "Removed",
+        "modified": "Modified",
+        "unchanged": "Unchanged"
+      }
     }
   }
 }

@@ -168,6 +168,21 @@
       "noMatch": "没有匹配结果",
       "truncated": "结果已截断（超过 10000 条）",
       "error.invalidPattern": "无效的正则表达式"
+    },
+    "json-diff": {
+      "name": "JSON 比对工具",
+      "description": "比较两个 JSON 结构的差异",
+      "left": "原始",
+      "right": "修改后",
+      "compare": "比对",
+      "noDiff": "两个 JSON 结构完全相同",
+      "error.tooLarge": "输入超过 2 MB 限制",
+      "type": {
+        "added": "新增",
+        "removed": "删除",
+        "modified": "修改",
+        "unchanged": "未变化"
+      }
     }
   }
 }

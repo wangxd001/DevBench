@@ -9,6 +9,7 @@ const HttpHeaderParser = lazy(() => import("@/tools/http/http-header-parser").th
 const JwtDecoder = lazy(() => import("@/tools/http/jwt-decoder").then(m => ({ default: m.JwtDecoder })));
 const JsonFormatter = lazy(() => import("@/tools/data/json-formatter").then(m => ({ default: m.JsonFormatter })));
 const RegexTester = lazy(() => import("@/tools/text/regex-tester").then(m => ({ default: m.RegexTester })));
+const JsonDiff = lazy(() => import("@/tools/data/json-diff").then(m => ({ default: m.JsonDiff })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -125,6 +126,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: RegexTester,
     recommended: false,
     relatedTools: ["text-diff", "test-data-generator", "json-formatter"],
+  },
+  "json-diff": {
+    id: "json-diff",
+    name: { "zh-CN": "JSON 比对工具", "en-US": "JSON Diff" },
+    description: {
+      "zh-CN": "比较两个 JSON 结构的差异",
+      "en-US": "Compare differences between two JSON structures"
+    },
+    categoryId: "data",
+    tags: ["json", "comparison"],
+    keywords: {
+      "zh-CN": ["json", "比对", "diff"],
+      "en-US": ["json", "diff", "compare"]
+    },
+    icon: "diff",
+    route: "/tools/json-diff",
+    component: JsonDiff,
+    recommended: false,
+    relatedTools: ["json-formatter", "json-yaml-converter", "text-diff"],
   },
   "uuid-generator": {
     id: "uuid-generator",
