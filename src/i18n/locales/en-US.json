@@ -14,7 +14,8 @@
       "http": "HTTP & Web",
       "datetime": "Date & Time",
       "data": "Data & JSON",
-      "text": "Text & Regex"
+      "text": "Text & Regex",
+      "generator": "Generators"
     }
   },
   "tool": {
@@ -183,6 +184,17 @@
         "modified": "Modified",
         "unchanged": "Unchanged"
       }
+    },
+    "random-string-generator": {
+      "name": "Random String Generator",
+      "description": "Generate random strings",
+      "length": "Length",
+      "quantity": "Quantity",
+      "charsets": "Character Set",
+      "custom": "Custom chars",
+      "generate": "Generate",
+      "copyAll": "Copy All",
+      "error.emptyCharset": "Character set cannot be empty"
     }
   }
 }

@@ -10,6 +10,7 @@ const JwtDecoder = lazy(() => import("@/tools/http/jwt-decoder").then(m => ({ de
 const JsonFormatter = lazy(() => import("@/tools/data/json-formatter").then(m => ({ default: m.JsonFormatter })));
 const RegexTester = lazy(() => import("@/tools/text/regex-tester").then(m => ({ default: m.RegexTester })));
 const JsonDiff = lazy(() => import("@/tools/data/json-diff").then(m => ({ default: m.JsonDiff })));
+const RandomStringGenerator = lazy(() => import("@/tools/generator/random-string-generator").then(m => ({ default: m.RandomStringGenerator })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -187,16 +188,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["datetime-formatter", "timestamp-converter"],
   },
-  "random-string-generator": {
+"random-string-generator": {
     id: "random-string-generator",
     name: { "zh-CN": "随机字符串生成器", "en-US": "Random String Generator" },
     description: { "zh-CN": "生成随机字符串", "en-US": "Generate random strings" },
     categoryId: "generator",
-    tags: ["generation", "random"],
+    tags: ["generation"],
     keywords: { "zh-CN": ["随机", "字符串", "生成"], "en-US": ["random", "string", "generate"] },
     icon: "shuffle",
     route: "/tools/random-string-generator",
-    component: ComingSoon,
+    component: RandomStringGenerator,
     recommended: false,
     relatedTools: ["uuid-generator", "test-data-generator", "hash-generator"],
   },

@@ -14,7 +14,8 @@
       "http": "HTTP 与 Web",
       "datetime": "日期与时间",
       "data": "数据处理",
-      "text": "文本与正则"
+      "text": "文本与正则",
+      "generator": "数据生成"
     }
   },
   "tool": {
@@ -183,6 +184,17 @@
         "modified": "修改",
         "unchanged": "未变化"
       }
+    },
+    "random-string-generator": {
+      "name": "随机字符串生成器",
+      "description": "生成随机字符串",
+      "length": "长度",
+      "quantity": "数量",
+      "charsets": "字符集",
+      "custom": "自定义字符",
+      "generate": "生成",
+      "copyAll": "复制全部",
+      "error.emptyCharset": "字符集不能为空"
     }
   }
 }
