@@ -7,6 +7,7 @@ const TimestampConverter = lazy(() => import("@/tools/datetime/timestamp-convert
 const Base64Converter = lazy(() => import("@/tools/encoding/base64-converter").then(m => ({ default: m.Base64Converter })));
 const HttpHeaderParser = lazy(() => import("@/tools/http/http-header-parser").then(m => ({ default: m.HttpHeaderParser })));
 const JwtDecoder = lazy(() => import("@/tools/http/jwt-decoder").then(m => ({ default: m.JwtDecoder })));
+const JsonFormatter = lazy(() => import("@/tools/data/json-formatter").then(m => ({ default: m.JsonFormatter })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -85,6 +86,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: JwtDecoder,
     recommended: false,
     relatedTools: ["base64-converter", "http-header-parser", "http-cookie-parser"],
+  },
+  "json-formatter": {
+    id: "json-formatter",
+    name: { "zh-CN": "JSON 格式化与校验", "en-US": "JSON Formatter & Validator" },
+    description: {
+      "zh-CN": "格式化、压缩和校验 JSON",
+      "en-US": "Format, minify and validate JSON"
+    },
+    categoryId: "data",
+    tags: ["json", "validation"],
+    keywords: {
+      "zh-CN": ["json", "格式化", "校验"],
+      "en-US": ["json", "format", "validate"]
+    },
+    icon: "braces",
+    route: "/tools/json-formatter",
+    component: JsonFormatter,
+    recommended: true,
+    relatedTools: ["json-diff", "json-yaml-converter", "base64-converter"],
   },
   "uuid-generator": {
     id: "uuid-generator",

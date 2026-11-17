@@ -12,7 +12,8 @@
     "category": {
       "encoding": "编码与哈希",
       "http": "HTTP 与 Web",
-      "datetime": "日期与时间"
+      "datetime": "日期与时间",
+      "data": "数据处理"
     }
   },
   "tool": {
@@ -141,6 +142,19 @@
       "signature": "Signature",
       "securityWarning": "解码 JWT 不会验证其签名或真实性。",
       "expExpired": "该 JWT 已过期"
+    },
+    "json-formatter": {
+      "name": "JSON 格式化与校验",
+      "description": "格式化、压缩和校验 JSON",
+      "mode": "模式",
+      "mode.pretty": "格式化",
+      "mode.minify": "压缩",
+      "indent": "缩进",
+      "input": "JSON 输入",
+      "format": "格式化",
+      "result": "结果",
+      "error.tooLarge": "输入超过 5 MB 限制",
+      "error.position": "第 {{line}} 行，第 {{column}} 列"
     }
   }
 }
