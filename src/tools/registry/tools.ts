@@ -17,6 +17,7 @@ const DatetimeFormatter = lazy(() => import("@/tools/datetime/datetime-formatter
 const DateCalculator = lazy(() => import("@/tools/datetime/date-calculator").then(m => ({ default: m.DateCalculator })));
 const HashGenerator = lazy(() => import("@/tools/encoding/hash-generator").then(m => ({ default: m.HashGenerator })));
 const HttpCookieParser = lazy(() => import("@/tools/http/http-cookie-parser").then(m => ({ default: m.HttpCookieParser })));
+const TestDataGenerator = lazy(() => import("@/tools/generator/test-data-generator").then(m => ({ default: m.TestDataGenerator })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -207,16 +208,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["uuid-generator", "test-data-generator", "hash-generator"],
   },
-  "test-data-generator": {
+"test-data-generator": {
     id: "test-data-generator",
     name: { "zh-CN": "随机测试数据生成器", "en-US": "Test Data Generator" },
-    description: { "zh-CN": "生成模拟测试数据", "en-US": "Generate mock test data" },
+    description: { "zh-CN": "批量生成模拟测试数据", "en-US": "Generate mock test data in batches" },
     categoryId: "generator",
     tags: ["generation", "testing"],
     keywords: { "zh-CN": ["测试数据", "生成", "模拟"], "en-US": ["test data", "generate", "mock"] },
     icon: "database",
     route: "/tools/test-data-generator",
-    component: ComingSoon,
+    component: TestDataGenerator,
     recommended: false,
     relatedTools: ["uuid-generator", "random-string-generator", "json-formatter"],
   },

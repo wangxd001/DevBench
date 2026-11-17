@@ -272,6 +272,19 @@
       },
       "parse": "Parse",
       "empty": "No cookies to parse"
+    },
+    "test-data-generator": {
+      "name": "Test Data Generator",
+      "description": "Generate mock test data in JSON format",
+      "fields": "Field Configuration",
+      "addField": "Add Field",
+      "fieldType": "Type",
+      "fieldName": "Field Name",
+      "fixedValue": "Fixed Value",
+      "count": "Count",
+      "generate": "Generate",
+      "copyAll": "Copy JSON",
+      "result": "Generated Data"
     }
   }
 }
