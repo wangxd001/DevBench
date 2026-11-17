@@ -12,6 +12,7 @@ const RegexTester = lazy(() => import("@/tools/text/regex-tester").then(m => ({ 
 const JsonDiff = lazy(() => import("@/tools/data/json-diff").then(m => ({ default: m.JsonDiff })));
 const RandomStringGenerator = lazy(() => import("@/tools/generator/random-string-generator").then(m => ({ default: m.RandomStringGenerator })));
 const UnicodeConverter = lazy(() => import("@/tools/encoding/unicode-converter").then(m => ({ default: m.UnicodeConverter })));
+const HtmlEntityConverter = lazy(() => import("@/tools/encoding/html-entity-converter").then(m => ({ default: m.HtmlEntityConverter })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -228,7 +229,7 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["html-entity-converter", "url-encoder", "base64-converter"],
   },
-  "html-entity-converter": {
+"html-entity-converter": {
     id: "html-entity-converter",
     name: { "zh-CN": "HTML 实体编解码", "en-US": "HTML Entity Converter" },
     description: { "zh-CN": "HTML 实体与普通文本互转", "en-US": "Convert between HTML entities and text" },
@@ -237,7 +238,7 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     keywords: { "zh-CN": ["html", "实体", "编码"], "en-US": ["html", "entity", "encode"] },
     icon: "code",
     route: "/tools/html-entity-converter",
-    component: ComingSoon,
+    component: HtmlEntityConverter,
     recommended: false,
     relatedTools: ["unicode-converter", "url-encoder", "base64-converter"],
   },

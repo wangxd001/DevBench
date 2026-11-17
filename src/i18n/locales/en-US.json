@@ -211,6 +211,20 @@
         "unicode": "Unicode Escapes"
       },
       "error.invalid": "Invalid Unicode escape sequence"
+    },
+    "html-entity-converter": {
+      "name": "HTML Entity Converter",
+      "description": "Convert between HTML entities and text",
+      "mode.toEntity": "Text to HTML Entity",
+      "mode.toText": "HTML Entity to Text",
+      "input": {
+        "text": "Text",
+        "entity": "HTML Entities"
+      },
+      "result": {
+        "text": "Text",
+        "entity": "HTML Entities"
+      }
     }
   }
 }

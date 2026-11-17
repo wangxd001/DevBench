@@ -211,6 +211,20 @@
         "unicode": "Unicode 转义"
       },
       "error.invalid": "无效的 Unicode 转义序列"
+    },
+    "html-entity-converter": {
+      "name": "HTML 实体编解码",
+      "description": "HTML 实体与普通文本互转",
+      "mode.toEntity": "文本 → HTML 实体",
+      "mode.toText": "HTML 实体 → 文本",
+      "input": {
+        "text": "文本",
+        "entity": "HTML 实体"
+      },
+      "result": {
+        "text": "文本",
+        "entity": "HTML 实体"
+      }
     }
   }
 }
