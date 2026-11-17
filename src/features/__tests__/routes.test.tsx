@@ -29,11 +29,6 @@ describe("routes", () => {
     expect(screen.getByText("\u5de5\u5177\u5c1a\u672a\u5b9e\u73b0")).toBeDefined();
   });
 
-  it("valid tool ID shows coming soon", () => {
-    renderAt("/tools/json-formatter");
-    expect(screen.getByText("\u5de5\u5177\u5373\u5c06\u4e0a\u7ebf")).toBeDefined();
-  });
-
   it("404 page renders", () => {
     renderAt("/nonexistent");
     expect(screen.getByText("\u9875\u9762\u672a\u627e\u5230")).toBeDefined();
@@ -43,5 +38,10 @@ describe("routes", () => {
     renderAt("/privacy");
     const matches = screen.getAllByText("\u9690\u79c1\u4e0e\u5b89\u5168");
     expect(matches.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it("tools page renders", () => {
+    renderAt("/tools");
+    const matches = screen.getAllByText("\u5de5\u5177\u76ee\u5f55"); expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 });
