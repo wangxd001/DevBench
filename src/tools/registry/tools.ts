@@ -6,6 +6,7 @@ const UrlEncoder = lazy(() => import("@/tools/encoding/url-encoder").then(m => (
 const TimestampConverter = lazy(() => import("@/tools/datetime/timestamp-converter").then(m => ({ default: m.TimestampConverter })));
 const Base64Converter = lazy(() => import("@/tools/encoding/base64-converter").then(m => ({ default: m.Base64Converter })));
 const HttpHeaderParser = lazy(() => import("@/tools/http/http-header-parser").then(m => ({ default: m.HttpHeaderParser })));
+const JwtDecoder = lazy(() => import("@/tools/http/jwt-decoder").then(m => ({ default: m.JwtDecoder })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
 export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
@@ -65,6 +66,25 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     component: HttpHeaderParser,
     recommended: false,
     relatedTools: ["http-cookie-parser", "jwt-decoder", "http-status-codes"],
+  },
+  "jwt-decoder": {
+    id: "jwt-decoder",
+    name: { "zh-CN": "JWT 解析器", "en-US": "JWT Decoder" },
+    description: {
+      "zh-CN": "本地解码 JWT Header 和 Payload",
+      "en-US": "Decode JWT header and payload locally"
+    },
+    categoryId: "http",
+    tags: ["http", "security", "decoding"],
+    keywords: {
+      "zh-CN": ["jwt", "解析", "token"],
+      "en-US": ["jwt", "decode", "token"]
+    },
+    icon: "key",
+    route: "/tools/jwt-decoder",
+    component: JwtDecoder,
+    recommended: false,
+    relatedTools: ["base64-converter", "http-header-parser", "http-cookie-parser"],
   },
   "uuid-generator": {
     id: "uuid-generator",

@@ -131,6 +131,16 @@
       "parse": "Parse",
       "empty": "No headers to parse",
       "error.invalidLine": "Line {{line}} invalid: missing colon"
+    },
+    "jwt-decoder": {
+      "name": "JWT Decoder",
+      "description": "Decode JWT header and payload locally",
+      "decode": "Decode",
+      "header": "Header",
+      "payload": "Payload",
+      "signature": "Signature",
+      "securityWarning": "Decoding a JWT does not verify its signature or authenticity.",
+      "expExpired": "This JWT has expired"
     }
   }
 }

@@ -131,6 +131,16 @@
       "parse": "解析",
       "empty": "没有可解析的 Header",
       "error.invalidLine": "第 {{line}} 行无效：缺少冒号"
+    },
+    "jwt-decoder": {
+      "name": "JWT 解析器",
+      "description": "本地解码 JWT Header 和 Payload",
+      "decode": "解析",
+      "header": "Header",
+      "payload": "Payload",
+      "signature": "Signature",
+      "securityWarning": "解码 JWT 不会验证其签名或真实性。",
+      "expExpired": "该 JWT 已过期"
     }
   }
 }
