@@ -260,6 +260,18 @@
       "calculate": "Calculate",
       "copy": "Copy",
       "securityNote": "Hashing is not encryption. MD5 and SHA-1 are not suitable for security-sensitive use."
+    },
+    "http-cookie-parser": {
+      "name": "HTTP Cookie Parser",
+      "description": "Parse HTTP Cookie and Set-Cookie headers",
+      "mode.cookie": "Cookie Request",
+      "mode.setCookie": "Set-Cookie Response",
+      "input": {
+        "cookie": "Cookie Header",
+        "setCookie": "Set-Cookie Header"
+      },
+      "parse": "Parse",
+      "empty": "No cookies to parse"
     }
   }
 }

@@ -260,6 +260,18 @@
       "calculate": "计算",
       "copy": "复制",
       "securityNote": "哈希计算不等于加密。MD5 和 SHA-1 不适合安全敏感用途。"
+    },
+    "http-cookie-parser": {
+      "name": "HTTP Cookie 解析器",
+      "description": "解析 HTTP Cookie 和 Set-Cookie Header",
+      "mode.cookie": "Cookie 请求头",
+      "mode.setCookie": "Set-Cookie 响应头",
+      "input": {
+        "cookie": "Cookie Header",
+        "setCookie": "Set-Cookie Header"
+      },
+      "parse": "解析",
+      "empty": "没有可解析的 Cookie"
     }
   }
 }

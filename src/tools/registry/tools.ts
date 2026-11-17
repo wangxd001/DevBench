@@ -16,6 +16,7 @@ const HtmlEntityConverter = lazy(() => import("@/tools/encoding/html-entity-conv
 const DatetimeFormatter = lazy(() => import("@/tools/datetime/datetime-formatter").then(m => ({ default: m.DatetimeFormatter })));
 const DateCalculator = lazy(() => import("@/tools/datetime/date-calculator").then(m => ({ default: m.DateCalculator })));
 const HashGenerator = lazy(() => import("@/tools/encoding/hash-generator").then(m => ({ default: m.HashGenerator })));
+const HttpCookieParser = lazy(() => import("@/tools/http/http-cookie-parser").then(m => ({ default: m.HttpCookieParser })));
 const ComingSoon = lazy(() => import("@/features/tools/ComingSoon").then(m => ({ default: m.ComingSoon })));
 const UuidGenerator = lazy(() => import("@/tools/generator/uuid-generator").then(m => ({ default: m.UuidGenerator })));
 
@@ -258,16 +259,16 @@ export const TOOLS: Partial<Record<ToolId, ToolDefinition>> = {
     recommended: false,
     relatedTools: ["json-formatter", "json-diff", "text-diff"],
   },
-  "http-cookie-parser": {
+"http-cookie-parser": {
     id: "http-cookie-parser",
     name: { "zh-CN": "HTTP Cookie 解析器", "en-US": "HTTP Cookie Parser" },
-    description: { "zh-CN": "解析 HTTP Cookie 和 Set-Cookie", "en-US": "Parse HTTP cookies and Set-Cookie headers" },
+    description: { "zh-CN": "解析 HTTP Cookie 和 Set-Cookie Header", "en-US": "Parse HTTP Cookie and Set-Cookie headers" },
     categoryId: "http",
     tags: ["http", "web", "security"],
     keywords: { "zh-CN": ["cookie", "http", "解析"], "en-US": ["cookie", "http", "parse"] },
     icon: "cookie",
     route: "/tools/http-cookie-parser",
-    component: ComingSoon,
+    component: HttpCookieParser,
     recommended: false,
     relatedTools: ["http-header-parser", "jwt-decoder", "base64-converter"],
   },
