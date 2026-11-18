@@ -10,12 +10,19 @@ import { defineConfig, devices } from '@playwright/test';
 const DEV_PORT = 5173;
 const PREVIEW_PORT = 4173;
 
+// 手动指定备用端口（残留 server 占 4173/5173 时可切到 4175/5175 等）
+const DEV_PORT_OVERRIDE = process.env.DEV_PORT ? Number(process.env.DEV_PORT) : undefined;
+const PREVIEW_PORT_OVERRIDE = process.env.PREVIEW_PORT ? Number(process.env.PREVIEW_PORT) : undefined;
+
+const devPort = DEV_PORT_OVERRIDE ?? DEV_PORT;
+const previewPort = PREVIEW_PORT_OVERRIDE ?? PREVIEW_PORT;
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: false,
   reporter: [['html', { open: 'never' }]],
   use: {
-    baseURL: `http://localhost:${DEV_PORT}`,
+    baseURL: `http://localhost:${devPort}`,
     channel: 'chrome',
     trace: 'on-first-retry',
   },
@@ -28,18 +35,18 @@ export default defineConfig({
     {
       name: 'preview',
       testMatch: 'offline.spec.ts',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome', baseURL: `http://localhost:${PREVIEW_PORT}` },
+      use: { ...devices['Desktop Chrome'], channel: 'chrome', baseURL: `http://localhost:${previewPort}` },
       webServer: {
-        command: `npx vite preview --port ${PREVIEW_PORT} --strictPort`,
-        url: `http://localhost:${PREVIEW_PORT}`,
+        command: `npx vite preview --port ${previewPort} --strictPort`,
+        url: `http://localhost:${previewPort}`,
         reuseExistingServer: true,
         timeout: 60_000,
       },
     },
   ],
   webServer: {
-    command: `npx vite --port ${DEV_PORT} --strictPort`,
-    url: `http://localhost:${DEV_PORT}`,
+    command: `npx vite --port ${devPort} --strictPort`,
+    url: `http://localhost:${devPort}`,
     reuseExistingServer: true,
     timeout: 60_000,
   },

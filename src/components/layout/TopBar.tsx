@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Search, Moon, Sun } from 'lucide-react';
 import { usePreferencesStore } from '@/stores/preferences-store';
 
 export function TopBar() {
@@ -14,25 +15,31 @@ export function TopBar() {
         </span>
         <Link
           to="/search"
-          className="rounded-md px-2 py-1 text-sm text-text-secondary hover:bg-surface-muted"
+          title={t('search.ariaLabel')}
+          className="rounded-md px-2 py-1.5 text-sm text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label={t('search.ariaLabel')}
         >
-          🔍
+          <Search className="h-4 w-4" aria-hidden="true" />
         </Link>
       </div>
       <div className="flex items-center gap-2">
         <button
           type="button"
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-          className="rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
+          className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label={theme === 'light' ? t('theme.toggleToDark') : t('theme.toggleToLight')}
         >
-          {theme === 'light' ? `🌙 ${t('theme.dark')}` : `☀️ ${t('theme.light')}`}
+          {theme === 'light' ? (
+            <Moon className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Sun className="h-4 w-4" aria-hidden="true" />
+          )}
+          {theme === 'light' ? t('theme.dark') : t('theme.light')}
         </button>
         <button
           type="button"
           onClick={() => setLanguage(language === 'zh-CN' ? 'en-US' : 'zh-CN')}
-          className="rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
+          className="rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label={language === 'zh-CN' ? t('language.switchToEn') : t('language.switchToZh')}
         >
           {language === 'zh-CN' ? 'EN' : t('language.shortZh')}

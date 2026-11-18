@@ -325,6 +325,8 @@ Dark Theme 应为这些状态提供对应的可读颜色。
 - 纯图标按钮必须提供可访问名称。
 - 图标不能替代必要的文字说明。
 
+实现说明：项目使用 `lucide-react` 作为唯一图标库。工具/分类 icon 字符串由注册中心维护，经 `src/ui/icon-map.ts` 映射为具体 Lucide 组件；品牌 logo 为 `src/ui/DevBenchLogo.tsx`。
+
 ---
 
 ## 3. 全局页面框架

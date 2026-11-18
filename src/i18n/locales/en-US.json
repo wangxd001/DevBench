@@ -45,6 +45,9 @@
     "switchToZh": "切换到简体中文",
     "shortZh": "中文"
   },
+  "brand": {
+    "logoAria": "DevBench logo"
+  },
   "notFound": {
     "title": "Page not found",
     "description": "The page you visited does not exist or the tool is not yet implemented.",

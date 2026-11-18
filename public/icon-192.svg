@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
-  <rect width="192" height="192" rx="24" fill="#426A91"/>
-  <text x="96" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="80" font-weight="600" fill="white" text-anchor="middle">D</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="104" fill="#426A91"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round">
+    <rect x="118" y="156" width="122" height="200" rx="16" stroke-width="22"/>
+    <line x1="304" y1="172" x2="394" y2="172" stroke-width="22"/>
+    <line x1="304" y1="256" x2="394" y2="256" stroke-width="22" stroke-dasharray="44 24"/>
+    <line x1="304" y1="340" x2="394" y2="340" stroke-width="22"/>
+  </g>
 </svg>

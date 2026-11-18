@@ -42,9 +42,14 @@ React、TypeScript、Vite、Tailwind CSS、Radix UI、Zustand、React Router、C
 ## 7. PWA 与缓存
 - 使用 `vite-plugin-pwa`（`registerType: 'prompt'`）
 - Workbox 缓存策略：`navigateFallback: '/index.html'`，静态资源 `CacheFirst`（maxEntries: 100）
-- Manifest icons：SVG（192x192、512x512），存放在 `public/icon-*.svg`
+- Manifest icons：SVG（192x192、512x512，含 maskable），存放在 `public/icon-*.svg`；favicon 为 `public/favicon.svg`（`index.html` 直接 link，dev 模式生效）
 - 用户输入和结果绝不进入 Service Worker Cache
 - 更新流程：用户确认刷新后应用新缓存，提示须说明刷新会清空当前工具输入和结果
+
+## 7.1 图标体系
+- 使用 `lucide-react` 线性图标（DESIGN.md §2.9 指定 Lucide 风格），全局统一 stroke 视觉语言
+- 工具/分类 icon 字符串在注册中心维护，渲染层在 `src/ui/icon-map.ts` 映射为 Lucide 组件，`ToolIcon` 组件消费
+- 品牌 logo 为 `src/ui/DevBenchLogo.tsx`（输入面板→转换输出 抽象图形，主色 `#426A91`）
 
 ## 8. 决策记录
 | 日期 | 决策 | 背景 | PRD 依据 |
@@ -52,3 +57,4 @@ React、TypeScript、Vite、Tailwind CSS、Radix UI、Zustand、React Router、C
 | 2026-11-17 | vitest.config.ts 配置 `pool: 'vmThreads'` | vitest 5.1.0 默认 forks pool 有 bug，测试收集失败 | - |
 | 2026-11-17 | 全局搜索用独立路由 `/search` 而非 TopBar 内嵌下拉 | 移动端适配更自然，无结果目录入口易组织 | PRD §4.3 |
 | 2026-11-17 | PWA manifest 用 SVG 图标 | 无 PNG 生成工具，SVG 在现代浏览器中受 manifest 支持 | - |
+| 2026-11-18 | 图标用 lucide-react 单一库 | DESIGN.md 指定 Lucide 风格；统一 stroke、tree-shakeable，替代散落的 emoji 图标 | DESIGN.md §2.9 |

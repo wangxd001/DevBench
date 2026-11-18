@@ -17,5 +17,7 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     globals: true,
     pool: 'vmThreads',
+    // e2e/ 由 Playwright 独立执行（npm run test:e2e），不进 vitest
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
   },
 });
