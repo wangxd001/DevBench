@@ -1,11 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// 使用 dev server（vite）而非 prod build（vite preview）：
-// Vite 8 + React 19 的 prod build 有 useRef null bug（Rolldown 打包问题），
-// dev 模式正常渲染。待 Vite 上游修复后改回 preview。
+// 使用 dev server（vite）运行 E2E，启动快。
+// 注：Vite 8 + React 19 曾因预打包产生两份 React（useRef null / Invalid hook call），
+// 已在 vite.config.ts 用 resolve.dedupe 修复，dev 与 preview 均可正常渲染。
 //
-// 注意：如果本地已有其他 vite 实例占用 5173-5175，Playwright 会复用。
-// 建议跑 E2E 前关闭多余的 vite 实例，避免 stale 缓存导致 "Invalid hook call"。
+// 注意：如果本地已有其他 vite 实例占用 5173，Playwright 会复用（reuseExistingServer）。
 const DEV_PORT = 5173;
 
 export default defineConfig({

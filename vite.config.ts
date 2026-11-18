@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import { resolve, fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // Vite 8 configLoader native：用 fileURLToPath(import.meta.url) 取配置目录
 // （Windows 下 new URL().pathname 带前导斜杠，resolve 会失效）
@@ -52,5 +53,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: { '@': resolve(__dirname, 'src') },
+    // 确保 react / react-dom 只存在一个实例（避免 Invalid hook call）
+    dedupe: ['react', 'react-dom'],
   },
 });
