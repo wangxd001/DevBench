@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { usePreferencesStore } from '@/stores/preferences-store';
 
 export function TopBar() {
+  const { t } = useTranslation();
   const { theme, setTheme, language, setLanguage } = usePreferencesStore();
 
   return (
     <header className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
       <div className="flex items-center gap-3">
         <span className="text-sm text-text-secondary">
-          开发者与测试人员工具箱
+          {t('app.subtitle')}
         </span>
         <Link
           to="/search"
           className="rounded-md px-2 py-1 text-sm text-text-secondary hover:bg-surface-muted"
-          aria-label="搜索工具"
+          aria-label={t('search.ariaLabel')}
         >
           🔍
         </Link>
@@ -23,17 +25,17 @@ export function TopBar() {
           type="button"
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           className="rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
-          aria-label={theme === 'light' ? '切换到深色主题' : '切换到浅色主题'}
+          aria-label={theme === 'light' ? t('theme.toggleToDark') : t('theme.toggleToLight')}
         >
-          {theme === 'light' ? '🌙 深色' : '☀️ 浅色'}
+          {theme === 'light' ? `🌙 ${t('theme.dark')}` : `☀️ ${t('theme.light')}`}
         </button>
         <button
           type="button"
           onClick={() => setLanguage(language === 'zh-CN' ? 'en-US' : 'zh-CN')}
           className="rounded-md px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
-          aria-label={language === 'zh-CN' ? 'Switch to English' : '切换到简体中文'}
+          aria-label={language === 'zh-CN' ? t('language.switchToEn') : t('language.switchToZh')}
         >
-          {language === 'zh-CN' ? 'EN' : '中文'}
+          {language === 'zh-CN' ? 'EN' : t('language.shortZh')}
         </button>
       </div>
     </header>

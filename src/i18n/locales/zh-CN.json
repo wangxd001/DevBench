@@ -33,11 +33,16 @@
   },
   "theme": {
     "light": "浅色",
-    "dark": "深色"
+    "dark": "深色",
+    "toggleToDark": "切换到深色主题",
+    "toggleToLight": "切换到浅色主题"
   },
   "language": {
     "zh-CN": "简体中文",
-    "en-US": "English"
+    "en-US": "English",
+    "switchToEn": "Switch to English",
+    "switchToZh": "切换到简体中文",
+    "shortZh": "中文"
   },
   "notFound": {
     "title": "页面未找到",
@@ -57,7 +62,8 @@
     "empty": "还没有收藏任何工具",
     "pin": "置顶",
     "unpin": "取消置顶",
-    "remove": "移除收藏"
+    "remove": "移除收藏",
+    "add": "收藏"
   },
   "recent": {
     "empty": "还没有使用记录",
@@ -75,6 +81,8 @@
     }
   },
   "tools": {
+    "browseByCategory": "按分类浏览",
+    "emptyCategory": "该分类下暂无工具",
     "uuid-generator": {
       "name": "UUID 生成器",
       "description": "生成 UUID v4 格式的标识符",

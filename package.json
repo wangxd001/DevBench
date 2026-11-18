@@ -12,7 +12,9 @@
     "preview": "vite preview",
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "keywords": [],
   "type": "module",
@@ -38,8 +40,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@codemirror/lang-javascript": "^6.2.5",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/vite": "^4.3.5",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

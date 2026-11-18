@@ -33,11 +33,16 @@
   },
   "theme": {
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "toggleToDark": "Switch to dark theme",
+    "toggleToLight": "Switch to light theme"
   },
   "language": {
     "zh-CN": "简体中文",
-    "en-US": "English"
+    "en-US": "English",
+    "switchToEn": "Switch to English",
+    "switchToZh": "切换到简体中文",
+    "shortZh": "中文"
   },
   "notFound": {
     "title": "Page not found",
@@ -57,7 +62,8 @@
     "empty": "No favorite tools yet",
     "pin": "Pin",
     "unpin": "Unpin",
-    "remove": "Remove favorite"
+    "remove": "Remove favorite",
+    "add": "Add to favorites"
   },
   "recent": {
     "empty": "No recent tools",
@@ -75,6 +81,8 @@
     }
   },
   "tools": {
+    "browseByCategory": "Browse by category",
+    "emptyCategory": "No tools in this category yet",
     "uuid-generator": {
       "name": "UUID Generator",
       "description": "Generate UUID v4 identifiers",
