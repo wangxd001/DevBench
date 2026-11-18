@@ -1,4 +1,9 @@
-:root, [data-theme="light"] {
+/*
+ * Design Tokens（Tailwind v4）
+ * @theme 中的 --color-* 会生成 bg-* / text-* / border-* 等语义化工具类。
+ * [data-theme="dark"] 通过覆盖同名变量实现运行时主题切换。
+ */
+@theme {
   --color-primary: #426A91;
   --color-primary-hover: #355979;
   --color-primary-soft: #EAF1F7;
@@ -16,7 +21,12 @@
   --color-info: #356D9A;
 }
 
+:root {
+  color-scheme: light;
+}
+
 [data-theme="dark"] {
+  color-scheme: dark;
   --color-primary: #8DB4D8;
   --color-primary-hover: #A7C7E3;
   --color-primary-soft: #263B4E;
