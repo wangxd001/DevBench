@@ -2,11 +2,11 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import { resolve } from 'path';
-import { dirname } from 'path';
+import { resolve, fileURLToPath } from 'node:url';
 
-// Vite 8: configLoader 'native' 下 __dirname 不可用，用 import.meta.dirname
-const configDir = dirname(new URL(import.meta.url).pathname);
+// Vite 8 configLoader native：用 fileURLToPath(import.meta.url) 取配置目录
+// （Windows 下 new URL().pathname 带前导斜杠，resolve 会失效）
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -51,6 +51,6 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    alias: { '@': resolve(configDir, './src') },
+    alias: { '@': resolve(__dirname, 'src') },
   },
 });
