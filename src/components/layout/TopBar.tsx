@@ -7,7 +7,7 @@ export function TopBar() {
   const { theme, setTheme, language, setLanguage } = usePreferencesStore();
 
   return (
-    <header className="flex items-center justify-between border-b border-border bg-surface px-4 py-2">
+    <header className="flex shrink-0 items-center justify-between border-b border-border bg-surface px-4 py-2">
       <div className="flex items-center gap-3">
         <span className="text-sm text-text-secondary">
           {t('app.subtitle')}
