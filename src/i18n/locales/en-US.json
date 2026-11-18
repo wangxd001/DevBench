@@ -9,6 +9,7 @@
     "favorites": "Favorites",
     "recent": "Recent",
     "privacy": "Privacy & Security",
+    "ariaLabel": "Main navigation",
     "category": {
       "encoding": "Encoding & Hash",
       "http": "HTTP & Web",

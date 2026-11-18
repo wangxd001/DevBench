@@ -9,6 +9,7 @@
     "favorites": "收藏",
     "recent": "最近使用",
     "privacy": "隐私与安全",
+    "ariaLabel": "主导航",
     "category": {
       "encoding": "编码与哈希",
       "http": "HTTP 与 Web",
