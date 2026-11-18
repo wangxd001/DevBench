@@ -8,7 +8,7 @@ async function gotoAndWait(page: Page, path: string): Promise<void> {
 test.describe('全局搜索', () => {
   test('输入关键词展示结果', async ({ page }) => {
     await gotoAndWait(page, '/search?query=json');
-    const results = page.locator('ul li a');
+    const results = page.locator('main ul li a');
     await expect(results.first()).toBeVisible();
     await expect(results.first()).toContainText(/JSON 格式化/);
   });

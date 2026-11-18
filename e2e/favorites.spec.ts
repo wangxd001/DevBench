@@ -12,7 +12,7 @@ test.describe('收藏与置顶', () => {
   });
 
   test('收藏工具并持久化', async ({ page }) => {
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await page.locator('section').first().waitFor();
 
     const favBtn = page.locator('section ul li').first().getByRole('button');
@@ -30,7 +30,7 @@ test.describe('收藏与置顶', () => {
   });
 
   test('取消收藏', async ({ page }) => {
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await page.locator('section').first().waitFor();
 
     const favBtn = page.locator('section ul li').first().getByRole('button');

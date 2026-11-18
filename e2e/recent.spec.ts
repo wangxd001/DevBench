@@ -12,7 +12,7 @@ test.describe('最近使用', () => {
   });
 
   test('进入工具页后记录最近使用', async ({ page }) => {
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await page.locator('section').first().waitFor();
     await page.getByRole('link', { name: /UUID/ }).first().click();
     await expect(page).toHaveURL('/tools/uuid-generator');
@@ -25,7 +25,7 @@ test.describe('最近使用', () => {
   });
 
   test('最多保留 10 个', async ({ page }) => {
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await page.locator('section').first().waitFor();
 
     const toolIds = [
@@ -46,7 +46,7 @@ test.describe('最近使用', () => {
   });
 
   test('清空最近使用', async ({ page }) => {
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await page.locator('section').first().waitFor();
     await page.getByRole('link', { name: /UUID/ }).first().click();
 

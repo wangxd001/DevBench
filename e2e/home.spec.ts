@@ -10,12 +10,12 @@ test.describe('首页', () => {
   test('展示标题和副标题', async ({ page }) => {
     await gotoAndWait(page, '/');
     await expect(page.locator('h1')).toHaveText('DevBench');
-    await expect(page.getByText('开发者与测试人员工具箱')).toBeVisible();
+    await expect(page.locator('main').getByText('开发者与测试人员工具箱')).toBeVisible();
   });
 
   test('导航到工具目录', async ({ page }) => {
     await gotoAndWait(page, '/');
-    await page.getByRole('link', { name: '工具目录' }).click();
+    await page.locator('main').getByRole('link', { name: '工具目录' }).click();
     await expect(page).toHaveURL('/tools');
     await page.locator('section').first().waitFor();
   });
