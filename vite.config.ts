@@ -3,6 +3,10 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { resolve } from 'path';
+import { dirname } from 'path';
+
+// Vite 8: configLoader 'native' 下 __dirname 不可用，用 import.meta.dirname
+const configDir = dirname(new URL(import.meta.url).pathname);
 
 export default defineConfig({
   plugins: [
@@ -47,6 +51,6 @@ export default defineConfig({
     }),
   ],
   resolve: {
-    alias: { '@': resolve(__dirname, './src') },
+    alias: { '@': resolve(configDir, './src') },
   },
 });
