@@ -36,19 +36,21 @@ export function FavoritesPage() {
             if (!tool) return null;
             const isPinned = pinnedSet.has(id);
             return (
-              <li key={id} className="flex items-center justify-between rounded-lg border border-border bg-surface p-4">
+              <li key={id} className="relative flex items-center justify-between rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary">
                 <Link
                   to={tool.route}
-                  className="flex flex-col gap-0.5 transition-colors hover:text-primary"
+                  className="flex min-w-0 items-center gap-2.5 transition-colors after:absolute after:inset-0 after:rounded-lg hover:text-primary focus:outline-none focus-visible:after:ring-2 focus-visible:after:ring-primary"
                 >
-                  <span className="flex items-center gap-1.5 text-sm font-medium text-text">
-                    <ToolIcon icon={tool.icon} className="h-4 w-4 shrink-0 text-primary" />
-                    {language === 'zh-CN' ? tool.name['zh-CN'] : tool.name['en-US']}
-                  </span>
-                  <span className="pl-6 text-xs text-text-secondary">
-                    {language === 'zh-CN'
-                      ? tool.description['zh-CN']
-                      : tool.description['en-US']}
+                  <ToolIcon icon={tool.icon} className="h-6 w-6 shrink-0 text-primary" />
+                  <span className="flex min-w-0 flex-col gap-0.5">
+                    <span className="text-sm font-medium text-text">
+                      {language === 'zh-CN' ? tool.name['zh-CN'] : tool.name['en-US']}
+                    </span>
+                    <span className="text-xs text-text-secondary">
+                      {language === 'zh-CN'
+                        ? tool.description['zh-CN']
+                        : tool.description['en-US']}
+                    </span>
                   </span>
                 </Link>
                 <div className="flex items-center gap-1">
@@ -56,7 +58,7 @@ export function FavoritesPage() {
                     type="button"
                     onClick={() => togglePinned(id)}
                     title={isPinned ? t('favorites.unpin') : t('favorites.pin')}
-                    className="rounded p-1.5 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="relative z-10 rounded p-1.5 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     aria-label={isPinned ? t('favorites.unpin') : t('favorites.pin')}
                   >
                     {isPinned ? (
@@ -68,13 +70,13 @@ export function FavoritesPage() {
                   <button
                     type="button"
                     onClick={() => toggleFavorite(id)}
-                    className="rounded p-1.5 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    className="relative z-10 rounded p-1.5 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                     aria-label={t('favorites.remove')}
                   >
                     <X className="h-4 w-4" aria-hidden="true" />
                   </button>
                   <Star
-                    className="h-4 w-4 text-primary"
+                    className="pointer-events-none h-4 w-4 text-primary"
                     fill="currentColor"
                     aria-hidden="true"
                   />

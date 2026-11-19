@@ -40,28 +40,23 @@ export function SearchPage() {
     <div className="max-w-2xl">
       <h1 className="text-2xl font-semibold">{t('search.title')}</h1>
 
-      <div className="mt-4 flex items-center gap-2">
-        <div className="relative flex-1">
-          <SearchIcon
-            className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
-            aria-hidden="true"
-          />
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') submit();
-            }}
-            placeholder={t('search.placeholder')}
-            aria-label={t('search.ariaLabel')}
-            className="w-full rounded-lg border border-border bg-surface py-2.5 pl-9 pr-4 text-sm text-text outline-none focus:ring-2 focus:ring-primary"
-          />
-        </div>
-        <kbd className="rounded border border-border bg-surface-muted px-1.5 py-0.5 text-xs text-text-secondary">
-          {t('search.hint')}
-        </kbd>
+      <div className="relative mt-4">
+        <SearchIcon
+          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted"
+          aria-hidden="true"
+        />
+        <input
+          ref={inputRef}
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') submit();
+          }}
+          placeholder={t('search.placeholder')}
+          aria-label={t('search.ariaLabel')}
+          className="w-full rounded-lg border border-border bg-surface py-2.5 pl-9 pr-4 text-sm text-text outline-none focus:ring-2 focus:ring-primary"
+        />
       </div>
 
       {query && (

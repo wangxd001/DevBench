@@ -16,10 +16,16 @@ export function TopBar() {
         <Link
           to="/search"
           title={t('search.ariaLabel')}
-          className="rounded-md px-2 py-1.5 text-sm text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          className="inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           aria-label={t('search.ariaLabel')}
         >
           <Search className="h-4 w-4" aria-hidden="true" />
+          <kbd
+            className="rounded border border-border bg-surface-muted px-1.5 py-0.5 text-xs text-text-secondary"
+            aria-hidden="true"
+          >
+            {t('search.hint')}
+          </kbd>
         </Link>
       </div>
       <div className="flex items-center gap-2">

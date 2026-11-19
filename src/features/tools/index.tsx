@@ -47,19 +47,21 @@ export function ToolsPage() {
                     const isFav = favorites.includes(tool.id);
                     return (
                       <li key={tool.id}>
-                        <div className="group flex items-start justify-between rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary">
+                        <div className="group relative flex items-start justify-between rounded-lg border border-border bg-surface p-4 transition-colors hover:border-primary">
                           <Link
                             to={tool.route}
-                            className="flex items-center gap-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            className="flex min-w-0 items-center gap-2.5 rounded after:absolute after:inset-0 after:rounded-lg focus:outline-none focus-visible:after:ring-2 focus-visible:after:ring-primary"
                           >
-                            <span className="flex items-center gap-1.5 text-sm font-medium text-text">
-                              <ToolIcon icon={tool.icon} className="h-4 w-4 shrink-0 text-primary" />
-                              {language === 'zh-CN' ? tool.name['zh-CN'] : tool.name['en-US']}
-                            </span>
-                            <span className="text-xs text-text-secondary">
-                              {language === 'zh-CN'
-                                ? tool.description['zh-CN']
-                                : tool.description['en-US']}
+                            <ToolIcon icon={tool.icon} className="h-6 w-6 shrink-0 text-primary" />
+                            <span className="flex min-w-0 flex-col gap-0.5">
+                              <span className="text-sm font-medium text-text">
+                                {language === 'zh-CN' ? tool.name['zh-CN'] : tool.name['en-US']}
+                              </span>
+                              <span className="text-xs text-text-secondary">
+                                {language === 'zh-CN'
+                                  ? tool.description['zh-CN']
+                                  : tool.description['en-US']}
+                              </span>
                             </span>
                           </Link>
                           <button
@@ -67,7 +69,7 @@ export function ToolsPage() {
                             onClick={() => toggleFavorite(tool.id)}
                             aria-pressed={isFav}
                             aria-label={isFav ? t('favorites.remove') : t('favorites.add')}
-                            className="ml-3 shrink-0 rounded p-1 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                            className="relative z-10 ml-3 shrink-0 rounded p-1 text-text-secondary hover:bg-surface-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                           >
                             <Star
                               className="h-4 w-4"
