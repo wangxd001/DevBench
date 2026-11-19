@@ -1,0 +1,9 @@
+# SPA fallback（Cloudflare Pages）
+#
+# 规则自上而下匹配。所有真实的静态资源（/assets/*.js、/sw.js、/manifest.webmanifest、
+# /favicon.svg、/icon-*.svg、/registerSW.js）都是 dist 里确切存在的文件，Pages 会直接命中并
+# 返回真实文件，不会落到兜底规则。
+#
+# 兜底：任意未命中真实文件的路径（即前端路由，如 /tools/json-formatter）返回 index.html，
+# 交给 React Router 处理，实现 SPA fallback。与 PWA Workbox 的 navigateFallback('/index.html') 对齐。
+/*    /index.html   200

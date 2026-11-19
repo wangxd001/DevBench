@@ -14,17 +14,20 @@
 - Playwright E2E 已配置（10 spec + axe-core；chrome project 走 dev 5173，preview project 走 vite preview 4173 跑 offline；支持 DEV_PORT/PREVIEW_PORT env 绕开端口占用）
 - React "Invalid hook call" 已修复（Vite 8 预打包重复 react chunk；`resolve.dedupe`）
 - vitest 排除 e2e/ 目录（include 限定 src，避免误扫 playwright spec）
-- 207 个单测通过，dev/preview 页面均正常渲染、无 console 错误
-- E2E 31 用例通过（状态依赖用例全量序列偶发残留状态影响，单独重跑即过；非回归）
-- typecheck / ESLint 无错误，build 成功
+- 211 个单测通过，dev/preview 页面均正常渲染、无 console 错误
+- CodeMirror 暗色主题行号列背景已修复（src/styles/index.css 用 CSS 变量对齐 tokens，双主题通用）（2026-11-19）
+- Cloudflare Pages 安全响应头 + CSP 已配置（public/_headers + public/_redirects，随构建进 dist）；本地用模拟 Pages 静态服务器验证：响应头下发、SPA fallback、CSP 0 违规、Web Worker 正常（2026-11-19）
 
 ## 未完成任务
 
 - 真实设备性能验证（Base64/哈希大输入、Worker 超时、PWA 离线）
-- Cloudflare Pages 部署配置与验证（CSP / 安全响应头）
+- **上线 Cloudflare Pages 后** `curl -I https://<project>.pages.dev` 核验 CSP/安全响应头实际生效（本地模拟仅近似，最终以线上为准）
+- SECURITY.md 文档骨架（PRD §12 要求，尚未创建）
 
 ## 已知坑 / 决策记录
 
+- Cloudflare Pages 安全头（2026-11-19）：`public/_headers`/`_redirects` 是 Pages 专有，`vite preview` 不应用；CSP `script-src 'unsafe-inline'` 因 index.html 首屏防主题闪烁内联脚本（未来改 nonce/hash 可去掉）；`worker-src 'self' blob:` 让 Vite `?worker` 同源 worker 正常；本地验证用临时 Node 静态服务器解析 dist/_headers，勿误以为 `vite preview` 能测到响应头
+- CodeMirror 暗色行号列（2026-11-19）：`@codemirror/view` 默认样式 gutter 背景硬编码 `#f5f5f5`、行号 `#6c6c6c`，暗色下与 `--color-surface-muted` 不搭；在 src/styles/index.css 用 CSS 变量覆盖（gutter/内容区=surface-muted，行号=text-muted，active line/selection 用 color-mix 主题化）
 - 图标体系（2026-11-18）：lucide-react 唯一图标库；icon 字符串经 src/ui/icon-map.ts 映射，加新工具须同步该表；品牌 logo 与 public 三个 SVG 保持一致
 - vitest 误扫 e2e/（2026-11-18）：npm test 报 TransformStream is not defined 是扫到 playwright spec，include 限定 src 修复，勿误诊 jsdom
 - E2E 端口占用（2026-11-18）：残留 vite 占 4173/5173 致 offline 连接被拒；DEV_PORT/PREVIEW_PORT env 绕开；全量序列状态依赖用例（收藏/最近使用/语言）偶发残留状态影响，重跑对应 spec 即可
