@@ -67,6 +67,10 @@ export function parseDatetime(input: string): ParseResult {
   }
 }
 
+export function formatNowInput(date: Date = new Date()): string {
+  return format(date, "yyyy-MM-dd HH:mm:ss");
+}
+
 export function formatDatetime(
   date: Date,
   preset: FormatPreset | string,

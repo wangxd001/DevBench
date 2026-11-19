@@ -1,5 +1,20 @@
 import { describe, it, expect } from "vitest";
-import { addDays, dateDiff } from "../core";
+import { addDays, dateDiff, isValidDateString } from "../core";
+
+describe("isValidDateString", () => {
+  it("accepts dates in yyyy-MM-dd format", () => {
+    expect(isValidDateString("2023-01-31")).toBe(true);
+    expect(isValidDateString("2024-02-29")).toBe(true);
+  });
+
+  it("rejects invalid or differently formatted dates", () => {
+    expect(isValidDateString("2023-02-29")).toBe(false);
+    expect(isValidDateString("2023-1-31")).toBe(false);
+    expect(isValidDateString("2023/01/31")).toBe(false);
+    expect(isValidDateString("2023-01-31T00:00:00Z")).toBe(false);
+    expect(isValidDateString("")).toBe(false);
+  });
+});
 
 describe("addDays", () => {
   it("adds days to a date", () => {

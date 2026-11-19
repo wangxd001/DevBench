@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { formatDatetime, parseDatetime } from "../core";
+import { formatDatetime, formatNowInput, parseDatetime } from "../core";
 
 describe("parseDatetime", () => {
   it("parses ISO 8601 string", () => {
@@ -46,5 +46,18 @@ describe("formatDatetime", () => {
     const d = new Date("2023-11-14T22:13:20Z");
     const result = formatDatetime(d, "yyyy-MM-dd HH:mm:ss");
     expect(result).toMatch(/2023-11-1[45]/);
+  });
+});
+
+describe("formatNowInput", () => {
+  it("formats a date as a local datetime input value", () => {
+    const d = new Date(2023, 10, 14, 22, 13, 20);
+    expect(formatNowInput(d)).toBe("2023-11-14 22:13:20");
+  });
+
+  it("produces a value parseable by parseDatetime", () => {
+    const result = parseDatetime(formatNowInput());
+    expect(result.error).toBeUndefined();
+    expect(result.date).not.toBeNull();
   });
 });

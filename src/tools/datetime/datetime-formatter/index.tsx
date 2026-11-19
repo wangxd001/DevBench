@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ToolPageLayout } from "@/components/layout/ToolPageLayout";
 import { ToolActionBar } from "@/components/editor/ToolActionBar";
-import { TextareaInput } from "@/components/editor/TextareaInput";
-import { parseDatetime, formatDatetime } from "./core";
+import { parseDatetime, formatDatetime, formatNowInput } from "./core";
 
 export function DatetimeFormatter() {
   const { t } = useTranslation();
@@ -12,6 +11,12 @@ export function DatetimeFormatter() {
   const [customPattern, setCustomPattern] = useState("");
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleNow = () => {
+    setInput(formatNowInput());
+    setError(null);
+    setResult(null);
+  };
 
   const handleFormat = () => {
     setError(null);
@@ -36,8 +41,22 @@ export function DatetimeFormatter() {
           <label htmlFor="dt-input" className="text-sm font-medium text-text">
             {t("tools.datetime-formatter.input")}
           </label>
-          <div className="mt-1">
-            <TextareaInput value={input} onChange={setInput} rows={2} placeholder="2023-11-14T22:13:20Z" />
+          <div className="mt-1 flex gap-2">
+            <input
+              id="dt-input"
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="2023-11-14T22:13:20Z"
+              className="min-w-0 flex-1 rounded-md border border-border bg-surface-muted px-3 py-2 text-sm font-mono text-text focus:border-primary focus:outline-none"
+            />
+            <button
+              type="button"
+              onClick={handleNow}
+              className="shrink-0 rounded-md border border-border bg-surface-muted px-3 py-2 text-sm text-text-secondary hover:bg-primary-soft hover:text-primary"
+            >
+              {t("tools.datetime-formatter.now")}
+            </button>
           </div>
         </div>
 

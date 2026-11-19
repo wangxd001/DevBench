@@ -69,17 +69,17 @@ export function TestDataGenerator() {
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-text">{t("tools.test-data-generator.fields")}</span>
             <button type="button" onClick={addField}
-              className="rounded-md border border-border bg-surface px-2.5 py-1 text-xs text-text-secondary hover:bg-surface-muted">
+              className="rounded-md border border-border bg-surface-muted px-2.5 py-1 text-xs text-text-secondary hover:bg-primary-soft hover:text-primary">
               + {t("tools.test-data-generator.addField")}
             </button>
           </div>
           <div className="mt-2 space-y-2">
             {fields.map((field) => (
-              <div key={field.id} className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface-muted p-2">
+              <div key={field.id} className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface p-2">
                 <select
                   value={field.type}
                   onChange={(e) => updateField(field.id, { type: e.target.value as TestField["type"] })}
-                  className="rounded-md border border-border bg-surface px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
+                  className="rounded-md border border-border bg-surface-muted px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
                   aria-label={t("tools.test-data-generator.fieldType")}
                 >
                   {FIELD_TYPES.map((ft) => (
@@ -90,23 +90,23 @@ export function TestDataGenerator() {
                   type="text"
                   value={field.name}
                   onChange={(e) => updateField(field.id, { name: e.target.value })}
-                  className="w-24 rounded-md border border-border bg-surface px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
+                  className="w-24 rounded-md border border-border bg-surface-muted px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
                   aria-label={t("tools.test-data-generator.fieldName")}
                 />
                 {field.type === "integer" && (
                   <>
                     <input type="number" value={field.min ?? 0} onChange={(e) => updateField(field.id, { min: parseInt(e.target.value, 10) || 0 })}
-                      className="w-16 rounded-md border border-border bg-surface px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
+                      className="w-16 rounded-md border border-border bg-surface-muted px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
                       aria-label="min" />
                     <span className="text-xs text-text-muted">–</span>
                     <input type="number" value={field.max ?? 1000} onChange={(e) => updateField(field.id, { max: parseInt(e.target.value, 10) || 1000 })}
-                      className="w-16 rounded-md border border-border bg-surface px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
+                      className="w-16 rounded-md border border-border bg-surface-muted px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
                       aria-label="max" />
                   </>
                 )}
                 {field.type === "fixed" && (
                   <input type="text" value={field.value ?? ""} onChange={(e) => updateField(field.id, { value: e.target.value })}
-                    className="flex-1 rounded-md border border-border bg-surface px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
+                    className="flex-1 rounded-md border border-border bg-surface-muted px-2 py-1 text-sm text-text focus:border-primary focus:outline-none"
                     aria-label={t("tools.test-data-generator.fixedValue")} />
                 )}
                 <button type="button" onClick={() => removeField(field.id)}

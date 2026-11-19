@@ -28,7 +28,7 @@ export function ToolPageLayout({ title, description, category, relatedTools, chi
               <Link
                 key={tool.id}
                 to={`/tools/${tool.id}`}
-                className="rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
+                className="rounded-md border border-border bg-surface-muted px-3 py-1.5 text-sm text-text-secondary hover:bg-primary-soft hover:text-primary"
               >
                 {tool.name}
               </Link>

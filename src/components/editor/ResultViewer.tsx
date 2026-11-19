@@ -21,7 +21,7 @@ export function ResultViewer({ content, collapsible = false }: ResultViewerProps
         <button
           type="button"
           onClick={() => setExpanded(!expanded)}
-          className="absolute bottom-1 right-1 rounded bg-surface px-2 py-0.5 text-xs text-text-secondary"
+          className="absolute bottom-1 right-1 rounded border border-border bg-surface-muted px-2 py-0.5 text-xs text-text-secondary hover:bg-primary-soft hover:text-primary"
         >
           {expanded ? "Collapse" : "Expand"}
         </button>

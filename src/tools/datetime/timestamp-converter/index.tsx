@@ -92,7 +92,7 @@ export function TimestampConverter() {
               <button
                 type="button"
                 onClick={handleNow}
-                className="rounded-md border border-border bg-surface px-3 py-2 text-sm text-text-secondary hover:bg-surface-muted"
+                className="rounded-md border border-border bg-surface-muted px-3 py-2 text-sm text-text-secondary hover:bg-primary-soft hover:text-primary"
               >
                 {t("tools.timestamp-converter.now")}
               </button>

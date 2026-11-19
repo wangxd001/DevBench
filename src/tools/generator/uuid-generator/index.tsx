@@ -85,7 +85,7 @@ export function UuidGenerator() {
               <button
                 type="button"
                 onClick={handleCopyAll}
-                className="rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-text-secondary hover:bg-surface-muted"
+                className="rounded-md border border-border bg-surface-muted px-3 py-1.5 text-sm text-text-secondary hover:bg-primary-soft hover:text-primary"
               >
                 {copied ? t("common.copied") : t("tools.uuid-generator.copyAll")}
               </button>

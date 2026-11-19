@@ -14,6 +14,10 @@ function formatYMD(date: Date): string {
   return date.toISOString().slice(0, 10);
 }
 
+export function isValidDateString(dateStr: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(dateStr) && parseDateOnly(dateStr) !== null;
+}
+
 export function addDays(dateStr: string, days: number): { value: string; error?: string } {
   const d = parseDateOnly(dateStr);
   if (!d) return { value: "", error: "Invalid date" };
