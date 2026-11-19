@@ -1,2 +1,37 @@
 @import 'tailwindcss';
 @import './tokens.css';
+
+/*
+ * CodeMirror 6 编辑器主题覆盖。
+ * @codemirror/view 的默认样式为浅色（gutter 背景 #f5f5f5、行号 #6c6c6c、active line 蓝底），
+ * 在暗色主题下与 --color-surface-muted 不匹配。这里用 CSS 变量（tokens.css 中已定义，
+ * [data-theme="dark"] 下会被覆盖）重排编辑器内部颜色，使两种主题均贴合 Design Tokens。
+ * 注意：默认样式里 .cm-gutters 背景是「直接写在规则里」的，优先级高于继承，必须显式覆盖。
+ */
+.cm-editor {
+  /* 内容区：与工具页输入框背景（bg-surface-muted）保持一致，去掉默认 #f5f5f5 兜底 */
+  background: var(--color-surface-muted);
+  /* 等宽字体对齐 DESIGN.md 编辑器规格 */
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+}
+
+/* 行号 gutter：暗色主题下不再保留浅色背景（默认 #f5f5f5 的来源），跟随内容区背景 */
+.cm-editor .cm-gutters {
+  background: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+/* active line 高亮：默认是半透明蓝底，暗色下与深色背景不搭；改用极淡的主题化底色，
+ * 且两种主题均可见（不只靠颜色深浅，避免暗色下几乎不可见） */
+.cm-editor .cm-activeLine {
+  background: color-mix(in srgb, var(--color-primary-soft) 45%, transparent);
+}
+
+/* 选中高亮：默认蓝底在暗色下过亮，使用主题主色的淡化版本 */
+.cm-editor ::selection {
+  background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+}
+
