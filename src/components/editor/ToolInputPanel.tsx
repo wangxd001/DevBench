@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Eraser } from "lucide-react";
 import { InputSizeIndicator } from "./InputSizeIndicator";
 
 interface ToolInputPanelProps {
@@ -7,19 +9,27 @@ interface ToolInputPanelProps {
   value: string;
   onChange: (value: string) => void;
   onClear?: () => void;
-  sizeLimit?: { current: number; limit: number; unit: string };
+  sizeLimit?: { current: number; limit: number };
   children?: ReactNode;
 }
 
 export function ToolInputPanel({ label, placeholder, value, onChange, onClear, sizeLimit, children }: ToolInputPanelProps) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium text-text">{label}</label>
         <div className="flex items-center gap-2">
-          {sizeLimit && <InputSizeIndicator current={sizeLimit.current} limit={sizeLimit.limit} unit={sizeLimit.unit} />}
+          {sizeLimit && <InputSizeIndicator current={sizeLimit.current} limit={sizeLimit.limit} />}
           {onClear && value && (
-            <button type="button" onClick={onClear} className="text-xs text-text-muted hover:text-text">Clear</button>
+            <button
+              type="button"
+              onClick={onClear}
+              className="inline-flex items-center gap-1 rounded text-xs text-text-muted hover:text-text focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <Eraser className="h-3.5 w-3.5" aria-hidden="true" />
+              {t("common.clear")}
+            </button>
           )}
         </div>
       </div>

@@ -10,11 +10,17 @@ interface CodeEditorProps {
 
 const CodeMirrorEditorImpl = lazy(() => import("@/components/editor/CodeMirrorEditorImpl"));
 
-export function CodeEditor({ value, onChange, language, height = 300 }: CodeEditorProps) {
+export function CodeEditor({ value, onChange, language, readOnly, height = 300 }: CodeEditorProps) {
   return (
     <div style={{ height }}>
       <Suspense fallback={<div className="h-full animate-pulse rounded-md bg-surface-muted" />}>
-        <CodeMirrorEditorImpl value={value} onChange={onChange} language={language} height={height} />
+        <CodeMirrorEditorImpl
+          value={value}
+          onChange={onChange}
+          language={language}
+          readOnly={readOnly}
+          height={height}
+        />
       </Suspense>
     </div>
   );

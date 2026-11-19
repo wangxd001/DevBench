@@ -67,7 +67,7 @@ export function JsonFormatter() {
           value={input}
           onChange={setInput}
           onClear={() => { setInput(""); setResult(null); }}
-          sizeLimit={{ current: byteLength, limit: LIMIT, unit: "B" }}
+          sizeLimit={{ current: byteLength, limit: LIMIT }}
         >
           <CodeEditor value={input} onChange={setInput} language="json" height={250} />
         </ToolInputPanel>

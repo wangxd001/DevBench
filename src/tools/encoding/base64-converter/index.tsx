@@ -63,7 +63,7 @@ export function Base64Converter() {
           value={input}
           onChange={setInput}
           onClear={() => setInput("")}
-          sizeLimit={{ current: byteLength, limit: LIMIT, unit: "B" }}
+          sizeLimit={{ current: byteLength, limit: LIMIT }}
         >
           <TextareaInput value={input} onChange={setInput} />
         </ToolInputPanel>

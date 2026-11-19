@@ -3,24 +3,36 @@ import { EditorState, Compartment } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
 import { json } from "@codemirror/lang-json";
 import { javascript } from "@codemirror/lang-javascript";
-import { basicSetup } from "@codemirror/basic-setup";
+import { basicSetup } from "codemirror";
 
 interface CodeMirrorEditorImplProps {
   value: string;
   onChange: (value: string) => void;
   language?: "json" | "javascript";
+  readOnly?: boolean;
   height?: number;
 }
+
+function readOnlyExtensions(readOnly: boolean) {
+  return [EditorState.readOnly.of(readOnly), EditorView.editable.of(!readOnly)];
+}
+
+// 让编辑器撑满外层固定高度的容器，点击容器内任意位置都能聚焦编辑
+const fillHeightTheme = EditorView.theme({
+  "&": { height: "100%" },
+});
 
 export default function CodeMirrorEditorImpl({
   value,
   onChange,
   language,
+  readOnly = false,
   height = 300,
 }: CodeMirrorEditorImplProps) {
   const ref = useRef<HTMLDivElement>(null);
   const editorRef = useRef<EditorView | null>(null);
   const languageCompartment = useRef(new Compartment());
+  const readOnlyCompartment = useRef(new Compartment());
   const onChangeRef = useRef(onChange);
   onChangeRef.current = onChange;
   const lastDocRef = useRef(value);
@@ -32,7 +44,9 @@ export default function CodeMirrorEditorImpl({
       doc: value,
       extensions: [
         basicSetup,
+        fillHeightTheme,
         languageCompartment.current.of(languageExt),
+        readOnlyCompartment.current.of(readOnlyExtensions(readOnly)),
         EditorView.lineWrapping,
       ],
     });
@@ -68,6 +82,14 @@ export default function CodeMirrorEditorImpl({
       });
     }
   }, [language]);
+
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.dispatch({
+        effects: readOnlyCompartment.current.reconfigure(readOnlyExtensions(readOnly)),
+      });
+    }
+  }, [readOnly]);
 
   useEffect(() => {
     if (editorRef.current) {

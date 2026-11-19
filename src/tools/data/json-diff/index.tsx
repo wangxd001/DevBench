@@ -47,7 +47,7 @@ export function JsonDiff() {
             value={left}
             onChange={setLeft}
             onClear={() => setLeft("")}
-            sizeLimit={{ current: leftBytes, limit: LIMIT, unit: "B" }}
+            sizeLimit={{ current: leftBytes, limit: LIMIT }}
           >
             <CodeEditor value={left} onChange={setLeft} language="json" height={200} />
           </ToolInputPanel>
@@ -56,7 +56,7 @@ export function JsonDiff() {
             value={right}
             onChange={setRight}
             onClear={() => setRight("")}
-            sizeLimit={{ current: rightBytes, limit: LIMIT, unit: "B" }}
+            sizeLimit={{ current: rightBytes, limit: LIMIT }}
           >
             <CodeEditor value={right} onChange={setRight} language="json" height={200} />
           </ToolInputPanel>
