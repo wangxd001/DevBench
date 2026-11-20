@@ -20,6 +20,8 @@ export function HashGenerator() {
   const [algo, setAlgo] = useState<HashAlgorithm>("sha-256");
   const [result, setResult] = useState<HashWorkerOutput | null>(null);
   const [processing, setProcessing] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   const managerRef = useRef<WorkerManager | null>(null);
   useEffect(() => {
@@ -30,6 +32,8 @@ export function HashGenerator() {
   const handleHash = useCallback(async () => {
     setProcessing(true);
     setResult(null);
+    setCopied(false);
+    setCopyError(false);
     try {
       const out = (await managerRef.current!.execute(
         { text: input, algorithm: algo },
@@ -44,8 +48,14 @@ export function HashGenerator() {
   }, [input, algo]);
 
   const handleCopy = useCallback(async () => {
-    if (result?.value) {
-      try { await navigator.clipboard.writeText(result.value); } catch { /* ignore */ }
+    if (!result?.value) return;
+    try {
+      await navigator.clipboard.writeText(result.value);
+      setCopied(true);
+      setCopyError(false);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopyError(true);
     }
   }, [result]);
 
@@ -69,13 +79,37 @@ export function HashGenerator() {
           <TextareaInput value={input} onChange={setInput} rows={4} />
         </ToolInputPanel>
 
+        {/* 不传 processing：hash 计算极快，loading 态一闪而过反而像闪烁；
+            只用 disabled 防重复点击，按钮文案保持「计算」。 */}
         <ToolActionBar
           primaryLabel={t("tools.hash-generator.calculate")}
           onPrimary={handleHash}
-          primaryDisabled={!input}
-          processing={processing}
-          secondaryActions={result?.value ? [{ label: t("tools.hash-generator.copy"), onClick: handleCopy }] : undefined}
+          primaryDisabled={!input || processing}
         />
+
+        {result?.value && (
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="rounded-md border border-border bg-surface-muted px-3 py-2 text-sm text-text-secondary hover:bg-primary-soft hover:text-primary"
+              >
+                {t("tools.hash-generator.copy")}
+              </button>
+              {copied && (
+                <span role="status" aria-live="polite" className="text-xs text-success">
+                  {t("common.copied")}
+                </span>
+              )}
+              {copyError && (
+                <span role="alert" className="text-xs text-error">
+                  {t("common.copyError")}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
 
         {result?.error && (
           <div role="alert" className="rounded-md border border-error bg-error/10 p-2 text-sm text-error">{result.error}</div>

@@ -19,6 +19,7 @@ export function RandomStringGenerator() {
   const [customCharset, setCustomCharset] = useState("");
   const [result, setResult] = useState<RandomStringResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const toggleCharset = (id: string) => {
     setCharsets((prev) => {
@@ -48,6 +49,8 @@ export function RandomStringGenerator() {
     if (!result) return;
     try {
       await navigator.clipboard.writeText(result.results.join("\n"));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
       setError(t("common.copyError"));
     }
@@ -99,7 +102,7 @@ export function RandomStringGenerator() {
         <ToolActionBar
           primaryLabel={t("tools.random-string-generator.generate")}
           onPrimary={handleGenerate}
-          secondaryActions={result ? [{ label: t("tools.random-string-generator.copyAll"), onClick: handleCopyAll }] : undefined}
+          secondaryActions={result ? [{ label: copied ? t("common.copied") : t("tools.random-string-generator.copyAll"), onClick: handleCopyAll }] : undefined}
         />
 
         {error && <div role="alert" className="rounded-md border border-error bg-error/10 p-2 text-sm text-error">{error}</div>}
