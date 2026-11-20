@@ -1,5 +1,34 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { generateTestData } from "../core";
+
+describe("generateTestData (browser crypto)", () => {
+  // Regression: previously imported Node's `crypto` module, which Vite externalizes
+  // in the browser, so `crypto.getRandomValues` threw at runtime.
+  it("works with the global Web Crypto API (no Node crypto import)", () => {
+    const result = generateTestData({
+      fields: [
+        { type: "string", name: "name" },
+        { type: "uuid", name: "id" },
+      ],
+      count: 3,
+    });
+    expect(result.records).toHaveLength(3);
+    for (const record of result.records) {
+      expect(record.id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
+    }
+  });
+
+  // Node's crypto module is not available in browsers (Vite externalizes it),
+  // so core.ts must rely on the global `crypto` (Web Crypto API) instead.
+  it("does not import Node's crypto module", () => {
+    const corePath = resolve(process.cwd(), "src/tools/generator/test-data-generator/core.ts");
+    const source = readFileSync(corePath, "utf8");
+    expect(source).not.toMatch(/from\s+['"]crypto['"]/);
+    expect(source).not.toMatch(/from\s+['"]node:crypto['"]/);
+  });
+});
 
 describe("generateTestData", () => {
   it("generates 10 records by default", () => {

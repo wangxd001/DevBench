@@ -1,4 +1,6 @@
-import crypto from "crypto";
+// 使用浏览器全局 Web Crypto API（globalThis.crypto）。
+// 不得 import Node 的 "crypto" 模块：Vite 在浏览器构建时会把它 externalize 成空对象，
+// 运行时调用 crypto.getRandomValues / crypto.randomUUID 会抛 TypeError。
 
 export interface TestField {
   type: "string" | "email" | "phone" | "age" | "integer" | "decimal" | "boolean" | "date" | "uuid" | "fixed";
