@@ -17,6 +17,8 @@
 - 211 个单测通过，dev/preview 页面均正常渲染、无 console 错误
 - CodeMirror 暗色主题行号列背景已修复（src/styles/index.css 用 CSS 变量对齐 tokens，双主题通用）（2026-11-19）
 - Cloudflare Pages 安全响应头 + CSP 已配置（public/_headers + public/_redirects，随构建进 dist）；本地用模拟 Pages 静态服务器验证：响应头下发、SPA fallback、CSP 0 违规、Web Worker 正常（2026-11-19）
+- test-data-generator 浏览器崩溃已修复（2026-11-20）：core.ts 误 `import crypto from "crypto"`（Node 内置模块），Vite 浏览器构建把它 externalize 成空对象，运行时 `crypto.getRandomValues` 抛 TypeError；改用全局 Web Crypto（`crypto.getRandomValues` / `crypto.randomUUID`），与 uuid-generator / random-string-generator 一致
+- http-status-codes 搜索按类别前缀匹配（2026-11-20）：原精确匹配致输入 200 只显示一条、看似没反应；现 `parseCategoryPrefix` 把 `2`/`20`/`200`/`2xx` 都映射到 2xx 整组，`404` 精确排首+保留同组；UI 加「匹配 N 条」实时反馈（i18n matchCount）。**真 bug**：分组 key 生成 `String(Math.floor(code/100)*100)+"x"` 得 "200x"，与 CATEGORIES 的 "2xx" 不一致，`map.get` 取不到致列表整组不渲染（只显示计数）——改 `Math.floor(code/100)+"xx"`，并加 index.test.tsx 组件测试防回归
 
 ## 未完成任务
 
@@ -39,6 +41,7 @@
 - jsdom warning 与 YAMLWarning 不兼容：yaml 自定义 tag 测试改断言 error 已定义
 - vitest 5.1.0 forks pool bug → pool: 'vmThreads'
 - worker-base 每任务独立 Worker，超时/取消后不复用，task.id 防旧结果覆盖
+- 浏览器代码禁止 `import ... from "crypto"` / `"node:crypto"`（2026-11-20）：Vite 把 Node 内置模块 externalize 成空对象，运行时调用其方法抛 TypeError（如 `crypto.getRandomValues`）；一律用全局 Web Crypto（`crypto.getRandomValues` / `crypto.randomUUID`，uuid-generator/random-string-generator 已这样用）。注意：Node 22+ 全局也有 `crypto`，单测在 Node 下跑不一定能复现浏览器问题，故 test-data-generator 加了静态断言 `源码不含 from "crypto"` 防回归
 
 ## 关键文件指引
 

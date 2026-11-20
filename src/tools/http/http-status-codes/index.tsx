@@ -17,7 +17,8 @@ export function HttpStatusCodes() {
       map.set(cat, []);
     }
     for (const entry of results) {
-      const cat = String(Math.floor(entry.code / 100) * 100) + "x";
+      // 分组 key 必须与 CATEGORIES 一致（"2xx"），不能用 "200x" 否则 map.get 取不到、列表不渲染
+      const cat = Math.floor(entry.code / 100) + "xx";
       map.get(cat)?.push(entry);
     }
     return map;
@@ -38,6 +39,12 @@ export function HttpStatusCodes() {
           className="w-full rounded-md border border-border bg-surface-muted px-3 py-2 text-sm text-text focus:border-primary focus:outline-none"
           aria-label={t("tools.http-status-codes.search")}
         />
+
+        {query.trim() && results.length > 0 && (
+          <p className="text-xs text-text-muted" role="status" aria-live="polite">
+            {t("tools.http-status-codes.matchCount", { count: results.length })}
+          </p>
+        )}
 
         {results.length === 0 ? (
           <div className="text-sm text-text-muted">{t("tools.http-status-codes.empty")}</div>

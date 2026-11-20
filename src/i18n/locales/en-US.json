@@ -113,6 +113,8 @@
       "description": "Look up HTTP status code meanings",
       "search": "Search status code (code, name or keyword)",
       "empty": "No matching status codes",
+      "matchCount": "{{count}} matches",
+      "matchCount_one": "{{count}} match",
       "category": {
         "1xx": "1xx Informational",
         "2xx": "2xx Success",
